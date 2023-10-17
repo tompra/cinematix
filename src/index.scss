@@ -1,5 +1,35 @@
 $color: steelblue;
 
-.my-flix {
+.my-cinematix {
     color: $color;
+}
+.movie-billboard {
+    width: 25%;
+}
+.btn--movie__title {
+    margin: 15px;
+}
+.movie--details__container {
+    margin: 10px 0;
+}
+.movie--details__title {
+    font-weight: 800;
+}
+button {
+    appearance: none;
+    background-color: #2ea44f;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+}
+
+button:hover {
+    background-color: #2c974b;
+    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
 }
