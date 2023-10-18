@@ -12,6 +12,7 @@ export const MainView = () => {
             .then(response => response.json())
             .then(data => {
                 const moviesFromAPI = data.map((movie, index) => {
+                    console.log(movie.imageUrl);
                     return {
                         id: index + 1,
                         title: movie.title,
@@ -26,6 +27,8 @@ export const MainView = () => {
                             name: movie.genre.name,
                             description: movie.genre.description,
                         },
+                        image: movie.imageUrl,
+                        actors: movie.actors,
                         featured: movie.featured,
                     };
                 });
