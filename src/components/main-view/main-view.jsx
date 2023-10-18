@@ -40,7 +40,6 @@ export const MainView = () => {
         //Filter movies by genres by name
         const similarMovies = movies.filter(movie => {
             // Similar genre name
-
             return (
                 movie.genre.name === selectedMovie.genre.name &&
                 movie.title !== selectedMovie.title
