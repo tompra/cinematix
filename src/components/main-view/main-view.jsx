@@ -38,9 +38,36 @@ export const MainView = () => {
 
     if (selectedMovie) {
         //Filter movies by genres by name
-        let similarMovies = movies.filter(movie => {
-            if (movie.genre.name === selectedMovie.genre.name) return movie;
+        const similarMovies = movies.filter(movie => {
+            // Similar genre name
+
+            return (
+                movie.genre.name === selectedMovie.genre.name &&
+                movie.title !== selectedMovie.title
+            );
         });
+        let similarMoviesContent;
+
+        if (similarMovies.length === 0) {
+            similarMoviesContent = <h2>There is no similar movies</h2>;
+        } else {
+            similarMoviesContent = (
+                <div>
+                    <h2>Similar movies</h2>
+                    {similarMovies.map(movie => {
+                        return (
+                            <MovieCard
+                                key={movie.id}
+                                movieData={movie}
+                                onMovieClick={newSelectedMovie =>
+                                    setSelectedMovie(newSelectedMovie)
+                                }
+                            />
+                        );
+                    })}
+                </div>
+            );
+        }
         return (
             <div>
                 <MovieView
@@ -48,19 +75,7 @@ export const MainView = () => {
                     onBackClick={() => setSelectedMovie(null)}
                 />
                 <hr />
-                <h2>Similar movies</h2>
-                {/* Map movies that are similar */}
-                {similarMovies.map(movie => {
-                    return (
-                        <MovieCard
-                            key={movie.id}
-                            movieData={movie}
-                            onMovieClick={newSelectedMovie =>
-                                setSelectedMovie(newSelectedMovie)
-                            }
-                        />
-                    );
-                })}
+                {similarMoviesContent}
             </div>
         );
     }
