@@ -12,7 +12,6 @@ export const MainView = () => {
             .then(response => response.json())
             .then(data => {
                 const moviesFromAPI = data.map((movie, index) => {
-                    console.log(movie.imageUrl);
                     return {
                         id: index + 1,
                         title: movie.title,
@@ -38,11 +37,31 @@ export const MainView = () => {
     }, []);
 
     if (selectedMovie) {
+        //Filter movies by genres by name
+        let similarMovies = movies.filter(movie => {
+            if (movie.genre.name === selectedMovie.genre.name) return movie;
+        });
         return (
-            <MovieView
-                movieData={selectedMovie}
-                onBackClick={() => setSelectedMovie(null)}
-            />
+            <div>
+                <MovieView
+                    movieData={selectedMovie}
+                    onBackClick={() => setSelectedMovie(null)}
+                />
+                <hr />
+                <h2>Similar movies</h2>
+                {/* Map movies that are similar */}
+                {similarMovies.map(movie => {
+                    return (
+                        <MovieCard
+                            key={movie.id}
+                            movieData={movie}
+                            onMovieClick={newSelectedMovie =>
+                                setSelectedMovie(newSelectedMovie)
+                            }
+                        />
+                    );
+                })}
+            </div>
         );
     }
 

@@ -1,8 +1,4 @@
 export const MovieView = ({ movieData, onBackClick }) => {
-    movieData.actors.map(actor => {
-        console.log(actor);
-    });
-
     return (
         <div>
             <div>
@@ -14,22 +10,22 @@ export const MovieView = ({ movieData, onBackClick }) => {
             </div>
             <div className='movie--details__container'>
                 <span className='movie--details__title'>Title</span>
-                <hr />
+                <br />
                 <span>{movieData.title}</span>
             </div>
             <div className='movie--details__container'>
                 <span className='movie--details__title'>Description</span>
-                <hr />
+                <br />
                 <span>{movieData.description}</span>
             </div>
             <div className='movie--details__container'>
                 <span className='movie--details__title'>Genre</span>
-                <hr />
+                <br />
                 <span>{movieData.genre.name}</span>
             </div>
             <div className='movie--details__container'>
                 <span className='movie--details__title'>Director</span>
-                <hr />
+                <br />
                 <span>{movieData.director.name}</span>
             </div>
             <button onClick={onBackClick}>Back</button>
