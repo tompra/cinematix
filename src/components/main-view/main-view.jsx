@@ -137,6 +137,7 @@ export const MainView = () => {
                     setToken(null);
                     localStorage.clear();
                 }}
+                id='btnLogout'
             >
                 Logout
             </button>

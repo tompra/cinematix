@@ -13,4 +13,10 @@ The complete tech stack to master the MERN (MongoDB, Express, React, and Node.js
 
 -   React
 -   React-dom
+-   Prop-Types
+
+## Dev-Dependencies
+
 -   Parcel
+-   Process
+-   Transformer-sass
