@@ -11,6 +11,7 @@ export const MainView = () => {
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [isLoginView, setLoginView] = useState(true);
 
     useEffect(() => {
         if (!token) {
@@ -47,16 +48,26 @@ export const MainView = () => {
             .catch(err => console.error(err));
     }, [token]);
 
+    const toggleLoginView = () => {
+        setLoginView(!isLoginView);
+    };
+
     if (!user) {
         return (
             <div>
-                <LoginView
-                    onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                    }}
-                />
-                <SignIn />
+                {isLoginView ? (
+                    <LoginView
+                        onLoggedIn={(user, token) => {
+                            setUser(user);
+                            setToken(token);
+                        }}
+                    />
+                ) : (
+                    <SignIn />
+                )}
+                <button onClick={toggleLoginView}>
+                    {isLoginView ? 'SignIn' : 'Login'}
+                </button>
             </div>
         );
     }
