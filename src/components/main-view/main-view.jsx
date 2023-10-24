@@ -55,30 +55,28 @@ export const MainView = () => {
 
     if (!user) {
         return (
-            <Row className='justify-content-md-center'>
-                <Col md={5}>
-                    {isLoginView ? (
-                        <LoginView
-                            onLoggedIn={(user, token) => {
-                                setUser(user);
-                                setToken(token);
-                            }}
-                        />
-                    ) : (
-                        <SignIn />
-                    )}
-                    <p>
-                        <a
-                            href='#'
-                            className='link-opacity-75-hover'
-                            onClick={toggleLoginView}
-                        >
-                            {isLoginView
-                                ? "Don't have an account"
-                                : 'I have an account already'}
-                        </a>
-                    </p>
-                </Col>
+            <Row className='d-flex justify-content-center'>
+                {isLoginView ? (
+                    <LoginView
+                        onLoggedIn={(user, token) => {
+                            setUser(user);
+                            setToken(token);
+                        }}
+                    />
+                ) : (
+                    <SignIn />
+                )}
+                <p className='text-center'>
+                    <a
+                        href='#'
+                        className='link-opacity-75-hover'
+                        onClick={toggleLoginView}
+                    >
+                        {isLoginView
+                            ? "Don't have an account"
+                            : 'I have an account already'}
+                    </a>
+                </p>
             </Row>
         );
     }
@@ -137,10 +135,10 @@ export const MainView = () => {
     }
     return (
         <div>
-            <Row className='justify-content-md-center'>
+            <Row>
                 {movies.map(movie => {
                     return (
-                        <Col key={movie.id} md={8} className='mb-5'>
+                        <Col key={movie.id}>
                             <MovieCard
                                 key={movie.id}
                                 movieData={movie}

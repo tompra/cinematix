@@ -63,9 +63,11 @@ export const LoginView = ({ onLoggedIn }) => {
                         required
                     />
                 </Form.Group>
-                <Button type='submit' variant='primary'>
-                    Submit
-                </Button>
+                <Form.Group className='my-3 d-flex justify-content-center'>
+                    <Button type='submit' variant='primary'>
+                        Login
+                    </Button>
+                </Form.Group>
             </Form>
         </>
     );

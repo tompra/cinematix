@@ -33,7 +33,7 @@ export const SignIn = () => {
         });
     };
     return (
-        <div>
+        <>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId='formUsername'>
                     <Form.Label>Username</Form.Label>
@@ -60,7 +60,7 @@ export const SignIn = () => {
                     <Form.Control
                         type='email'
                         value={email}
-                        onChange={e => e.target.value}
+                        onChange={e => setEmail(e.target.value)}
                         required
                     />
                 </Form.Group>
@@ -73,10 +73,12 @@ export const SignIn = () => {
                         required
                     />
                 </Form.Group>
-                <Button type='submit' variant='primary'>
-                    Submit
-                </Button>
+                <Form.Group className='my-3 d-flex justify-content-center'>
+                    <Button type='submit' variant='primary'>
+                        Signup
+                    </Button>
+                </Form.Group>
             </Form>
-        </div>
+        </>
     );
 };
