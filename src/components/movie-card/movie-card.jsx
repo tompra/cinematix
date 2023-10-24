@@ -1,15 +1,33 @@
+import './movie-card.scss';
 import Proptypes from 'prop-types';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 
 export const MovieCard = ({ movieData, onMovieClick }) => {
     return (
-        <div>
-            <button
-                onClick={() => onMovieClick(movieData)}
-                className='btn--movie__title'
-            >
-                {movieData.title}
-            </button>
-        </div>
+        <Row xs={2} sm={3} md={4} lg={5} className='g-4'>
+            <Col>
+                <Card>
+                    <Card.Img
+                        variant='top'
+                        src={movieData.image}
+                        style={{
+                            height: '200px',
+                            width: '150px',
+                            objectFit: 'cover',
+                        }}
+                    />
+                    <Card.Body>
+                        <Card.Title>{movieData.title}</Card.Title>
+                        <Card.Subtitle>
+                            Directed by: {movieData.director.name}
+                        </Card.Subtitle>
+                        <Button onClick={() => onMovieClick(movieData)}>
+                            Open
+                        </Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </Row>
     );
 };
 
