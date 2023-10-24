@@ -4,30 +4,16 @@ import { Button, Card, Row, Col } from 'react-bootstrap';
 
 export const MovieCard = ({ movieData, onMovieClick }) => {
     return (
-        <Row xs={2} sm={3} md={4} lg={5} className='g-4'>
-            <Col>
-                <Card>
-                    <Card.Img
-                        variant='top'
-                        src={movieData.image}
-                        style={{
-                            height: '200px',
-                            width: '150px',
-                            objectFit: 'cover',
-                        }}
-                    />
-                    <Card.Body>
-                        <Card.Title>{movieData.title}</Card.Title>
-                        <Card.Subtitle>
-                            Directed by: {movieData.director.name}
-                        </Card.Subtitle>
-                        <Button onClick={() => onMovieClick(movieData)}>
-                            Open
-                        </Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </Row>
+        <Card style={{ width: '18rem' }}>
+            <Card.Img variant='top' src={movieData.image} />
+            <Card.Body>
+                <Card.Title>{movieData.title}</Card.Title>
+                <Card.Subtitle>
+                    Directed by: {movieData.director.name}
+                </Card.Subtitle>
+                <Button onClick={() => onMovieClick(movieData)}>Open</Button>
+            </Card.Body>
+        </Card>
     );
 };
 

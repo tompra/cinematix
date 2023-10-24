@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
@@ -57,7 +56,7 @@ export const LoginView = ({ onLoggedIn }) => {
                 <Form.Group controlId='formPassword'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                        type='text'
+                        type='password'
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         minLength={8}
