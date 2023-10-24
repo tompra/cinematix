@@ -3,7 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col, Alert } from 'react-bootstrap';
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -67,9 +67,17 @@ export const MainView = () => {
                     ) : (
                         <SignIn />
                     )}
-                    <Button onClick={toggleLoginView}>
-                        {isLoginView ? 'SignIn' : 'Login'}
-                    </Button>
+                    <p>
+                        <a
+                            href='#'
+                            className='link-opacity-75-hover'
+                            onClick={toggleLoginView}
+                        >
+                            {isLoginView
+                                ? "Don't have an account"
+                                : 'I have an account already'}
+                        </a>
+                    </p>
                 </Col>
             </Row>
         );
