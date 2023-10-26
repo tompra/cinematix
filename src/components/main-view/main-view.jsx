@@ -83,9 +83,7 @@ export const MainView = () => {
     }
 
     if (selectedMovie) {
-        //Filter movies by genres by name
         const similarMovies = movies.filter(movie => {
-            // Similar genre name
             return (
                 movie.genre.name === selectedMovie.genre.name &&
                 movie.title !== selectedMovie.title
@@ -136,11 +134,11 @@ export const MainView = () => {
     }
     return (
         <div>
-            <NavBar />
+            <NavBar setUser={setUser} setToken={setToken} />
             <Row>
                 {movies.map(movie => {
                     return (
-                        <Col>
+                        <Col key={movie.id}>
                             <MovieCard
                                 key={movie.id}
                                 movieData={movie}
@@ -151,16 +149,6 @@ export const MainView = () => {
                         </Col>
                     );
                 })}
-                <Button
-                    onClick={() => {
-                        setUser(null);
-                        setToken(null);
-                        localStorage.clear();
-                    }}
-                    id='btnLogout'
-                >
-                    Logout
-                </Button>
             </Row>
         </div>
     );

@@ -1,3 +1,4 @@
+@import '~bootstrap/scss/bootstrap.scss';
 $btn-primary: #2ea44f;
 $btn-secondary: #17a0ce;
 
@@ -13,30 +14,6 @@ $btn-secondary: #17a0ce;
 .movie--details__title {
     font-weight: 800;
 }
-button {
-    appearance: none;
-    background-color: $btn-primary;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    margin: 0 10px;
-}
-
-button:hover {
-    background-color: darken($btn-primary, 10%);
-    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
-}
-
-#btnLogout {
-    background-color: $btn-secondary;
-}
-
-#btnLogout:hover {
-    background-color: darken($btn-secondary, 10%);
+#basic-navbar-nav{
+    align-items: normal;
 }
