@@ -144,9 +144,8 @@ export const MainView = () => {
             <Row>
                 {movies.map(movie => {
                     return (
-                        <Col key={movie.id}>
+                        <Col key={movie.id} className='my-3 mx-2'>
                             <MovieCard
-                                key={movie.id}
                                 movieData={movie}
                                 onMovieClick={newSelectedMovie =>
                                     setSelectedMovie(newSelectedMovie)
