@@ -3,7 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Button, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { NavBar } from '../nav-bar/nav-bar';
 
 export const MainView = () => {
@@ -95,33 +95,39 @@ export const MainView = () => {
             similarMoviesContent = <h2>There is no similar movies</h2>;
         } else {
             similarMoviesContent = (
-                <Row className='justify-content-md-center'>
-                    <Col>
-                        <h2>Similar movies</h2>
-                        {similarMovies.map(movie => {
-                            return (
-                                <MovieCard
-                                    key={movie.id}
-                                    movieData={movie}
-                                    onMovieClick={newSelectedMovie =>
-                                        setSelectedMovie(newSelectedMovie)
-                                    }
-                                />
-                            );
-                        })}
-                    </Col>
-                </Row>
+                <>
+                    <Row className='justify-content-md-center'>
+                        <Col>
+                            <h2>Similar movies</h2>
+                            {similarMovies.map(movie => {
+                                return (
+                                    <MovieCard
+                                        key={movie.id}
+                                        movieData={movie}
+                                        onMovieClick={newSelectedMovie =>
+                                            setSelectedMovie(newSelectedMovie)
+                                        }
+                                    />
+                                );
+                            })}
+                        </Col>
+                    </Row>
+                </>
             );
         }
         return (
-            <Row className='justify-content-md-center'>
-                <MovieView
-                    movieData={selectedMovie}
-                    onBackClick={() => setSelectedMovie(null)}
-                />
-                <hr />
-                {similarMoviesContent}
-            </Row>
+            <>
+                <Row className='justify-content-md-center'>
+                    <MovieView
+                        movieData={selectedMovie}
+                        onBackClick={() => setSelectedMovie(null)}
+                        setUser={setUser} 
+                        setToken={setToken}
+                    />
+                    <hr />
+                    {similarMoviesContent}
+                </Row>
+            </>
         );
     }
 
