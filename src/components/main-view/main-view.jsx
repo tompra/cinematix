@@ -3,7 +3,8 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Button, Row, Col, Alert } from 'react-bootstrap';
+import { Button, Row, Col } from 'react-bootstrap';
+import { NavBar } from '../nav-bar/nav-bar';
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -135,10 +136,11 @@ export const MainView = () => {
     }
     return (
         <div>
+            <NavBar />
             <Row>
                 {movies.map(movie => {
                     return (
-                        <Col key={movie.id}>
+                        <Col>
                             <MovieCard
                                 key={movie.id}
                                 movieData={movie}

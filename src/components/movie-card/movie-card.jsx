@@ -1,6 +1,6 @@
 import './movie-card.scss';
 import Proptypes from 'prop-types';
-import { Button, Card, Row, Col } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 export const MovieCard = ({ movieData, onMovieClick }) => {
     return (
@@ -9,7 +9,7 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
             <Card.Body>
                 <Card.Title>{movieData.title}</Card.Title>
                 <Card.Subtitle>
-                    Directed by: {movieData.director.name}
+                    Plot: {movieData.description}
                 </Card.Subtitle>
                 <Button onClick={() => onMovieClick(movieData)}>Open</Button>
             </Card.Body>

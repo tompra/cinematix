@@ -6,7 +6,7 @@ import { Container } from 'react-bootstrap';
 
 const App = () => {
     return (
-        <Container
+        <Container fluid
             style={{ minHeight: '100vh' }}
             className='d-flex justify-content-center align-items-center'
         >
