@@ -6,14 +6,20 @@ export const MovieCard = ({ movieData, onMovieClick }) => {
     return (
         <div>
             <Card style={{ width: '18rem', minHeight: '36rem' }}>
-                <Card.Img variant='top' src={movieData.image} className='card--img' />
+                <Card.Img
+                    variant='top'
+                    src={movieData.image}
+                    className='card--img'
+                />
                 <Card.Body>
                     <Card.Title className='mb-3'>{movieData.title}</Card.Title>
                     <Card.Subtitle className='mb-3'>
                         Directed by: {movieData.director.name}
                     </Card.Subtitle>
                     <div className='text-center'>
-                        <Button onClick={() => onMovieClick(movieData)}>Open</Button>
+                        <Button onClick={() => onMovieClick(movieData)}>
+                            Open
+                        </Button>
                     </div>
                 </Card.Body>
             </Card>

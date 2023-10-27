@@ -23,8 +23,8 @@ export const MainView = () => {
         fetch('https://popcornhub-api.onrender.com/movies', {
             headers: { Authorization: `Bearer ${token}` },
         })
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 const moviesFromAPI = data.map((movie, index) => {
                     return {
                         id: index + 1,
@@ -47,7 +47,7 @@ export const MainView = () => {
                 });
                 setMovies(moviesFromAPI);
             })
-            .catch(err => console.error(err));
+            .catch((err) => console.error(err));
     }, [token]);
 
     const toggleLoginView = () => {
@@ -85,7 +85,7 @@ export const MainView = () => {
     }
 
     if (selectedMovie) {
-        const similarMovies = movies.filter(movie => {
+        const similarMovies = movies.filter((movie) => {
             return (
                 movie.genre.name === selectedMovie.genre.name &&
                 movie.title !== selectedMovie.title
@@ -101,15 +101,18 @@ export const MainView = () => {
                     <Row className='d-flex justify-content-center mx-1'>
                         <Col>
                             <h2>Similar movies</h2>
-                            {similarMovies.map(movie => {
+                            {similarMovies.map((movie) => {
                                 return (
                                     <MovieCard
                                         key={movie.id}
                                         movieData={movie}
-                                        onMovieClick={newSelectedMovie =>
+                                        onMovieClick={(newSelectedMovie) =>
                                             setSelectedMovie(newSelectedMovie)
                                         }
-                                        style={{width: '12rem', minHeight: '25rem'}}
+                                        style={{
+                                            width: '12rem',
+                                            minHeight: '25rem',
+                                        }}
                                     />
                                 );
                             })}
@@ -120,16 +123,15 @@ export const MainView = () => {
         }
         return (
             <div>
-                    <MovieView
-                        movieData={selectedMovie}
-                        onBackClick={() => setSelectedMovie(null)}
-                        setUser={setUser} 
-                        setToken={setToken}
-                        user={user}
-                    />
-                    <hr />
-                    {similarMoviesContent}
-                
+                <MovieView
+                    movieData={selectedMovie}
+                    onBackClick={() => setSelectedMovie(null)}
+                    setUser={setUser}
+                    setToken={setToken}
+                    user={user}
+                />
+                <hr />
+                {similarMoviesContent}
             </div>
         );
     }
@@ -137,27 +139,27 @@ export const MainView = () => {
     if (movies.length === 0) {
         return (
             <div>
-                <p> The list is empty!</p> 
+                <p> The list is empty!</p>
             </div>
         );
     }
     return (
-            <div>
-                <NavBar setUser={setUser} setToken={setToken} user={user}/>
-                <Row className='mx-2' >
-                    {movies.map(movie => {
-                        return (
-                            <Col key={movie.id} className='my-3 mx-2'>
-                                <MovieCard
-                                    movieData={movie}
-                                    onMovieClick={newSelectedMovie =>
-                                        setSelectedMovie(newSelectedMovie)
-                                    }
-                                />
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </div>
+        <div>
+            <NavBar setUser={setUser} setToken={setToken} user={user} />
+            <Row className='mx-2'>
+                {movies.map((movie) => {
+                    return (
+                        <Col key={movie.id} className='my-3 mx-2'>
+                            <MovieCard
+                                movieData={movie}
+                                onMovieClick={(newSelectedMovie) =>
+                                    setSelectedMovie(newSelectedMovie)
+                                }
+                            />
+                        </Col>
+                    );
+                })}
+            </Row>
+        </div>
     );
 };

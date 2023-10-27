@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
-import logo from "../../images/cinematix-logo.svg"
+import logo from '../../images/cinematix-logo.svg';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
             username: username,
@@ -19,14 +19,14 @@ export const LoginView = ({ onLoggedIn }) => {
             },
             body: JSON.stringify(data),
         })
-            .then(response => {
+            .then((response) => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 } else {
                     return response.json();
                 }
             })
-            .then(response => {
+            .then((response) => {
                 console.log('Login response:', response);
                 if (response.user) {
                     localStorage.setItem('user', JSON.stringify(response.user));
@@ -36,7 +36,7 @@ export const LoginView = ({ onLoggedIn }) => {
                     alert('There is no user');
                 }
             })
-            .catch(err => {
+            .catch((err) => {
                 console.error(err);
                 alert('Something went wrong!');
             });
@@ -46,7 +46,11 @@ export const LoginView = ({ onLoggedIn }) => {
             <Container>
                 <Row className='d-flex justify-content-center align-items-center'>
                     <Col xs={12} md={6}>
-                        <Image src={logo} alt='Cinematix logo' className='img-fluid'/>
+                        <Image
+                            src={logo}
+                            alt='Cinematix logo'
+                            className='img-fluid'
+                        />
                     </Col>
                     <Col xs={12} md={6}>
                         <Form onSubmit={handleSubmit}>
@@ -55,7 +59,9 @@ export const LoginView = ({ onLoggedIn }) => {
                                 <Form.Control
                                     type='text'
                                     value={username}
-                                    onChange={e => setUsername(e.target.value)}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                     minLength={5}
                                     required
                                 />
@@ -65,7 +71,9 @@ export const LoginView = ({ onLoggedIn }) => {
                                 <Form.Control
                                     type='password'
                                     value={password}
-                                    onChange={e => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                     minLength={8}
                                     required
                                 />

@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
-import logo from "../../images/cinematix-logo.svg"
+import logo from '../../images/cinematix-logo.svg';
 
-
-useState;
 export const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
             username: username,
@@ -24,7 +22,7 @@ export const SignIn = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then(response => {
+        }).then((response) => {
             console.log('DATA', data);
             if (response.ok) {
                 alert('Signup sucessful');
@@ -39,7 +37,11 @@ export const SignIn = () => {
             <Container>
                 <Row className='d-flex justify-content-center align-items-center'>
                     <Col xs={12} md={6}>
-                        <Image src={logo} alt='Cinematix logo' className='img-fluid' />
+                        <Image
+                            src={logo}
+                            alt='Cinematix logo'
+                            className='img-fluid'
+                        />
                     </Col>
                     <Col xs={12} md={6}>
                         <Form onSubmit={handleSubmit}>
@@ -48,7 +50,9 @@ export const SignIn = () => {
                                 <Form.Control
                                     type='text'
                                     value={username}
-                                    onChange={e => setUsername(e.target.value)}
+                                    onChange={(e) =>
+                                        setUsername(e.target.value)
+                                    }
                                     minLength={5}
                                     required
                                 />
@@ -58,17 +62,19 @@ export const SignIn = () => {
                                 <Form.Control
                                     type='password'
                                     value={password}
-                                    onChange={e => setPassword(e.target.value)}
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
                                     minLength={8}
                                     required
                                 />
                             </Form.Group>
                             <Form.Group>
-                             <Form.Label>Email</Form.Label>
+                                <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type='email'
                                     value={email}
-                                    onChange={e => setEmail(e.target.value)}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
                             </Form.Group>
@@ -77,7 +83,9 @@ export const SignIn = () => {
                                 <Form.Control
                                     type='date'
                                     value={birthday}
-                                    onChange={e => setBirthday(e.target.value)}
+                                    onChange={(e) =>
+                                        setBirthday(e.target.value)
+                                    }
                                     required
                                 />
                             </Form.Group>
