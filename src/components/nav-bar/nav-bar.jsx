@@ -1,10 +1,15 @@
-import { Navbar, Nav, Container } from "react-bootstrap"
+import { Navbar, Nav, Container, Image } from "react-bootstrap"
+import logo from "../../images/cinematix-logo.svg"
+
 export const NavBar = ({setUser, setToken, user}) => {
     return(
     <div>
         <Navbar expand="lg" className="bg-primary">
           <Container fluid>
-            <Navbar.Brand href="#home">Cinematix</Navbar.Brand>
+            <Navbar.Brand href="#home">
+              <Image src={logo} alt='cinematix logo' className="navbar--logo"/>
+              Cinematix
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="justify-content-end" style={{ width: "100%" }}>

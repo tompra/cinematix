@@ -98,7 +98,7 @@ export const MainView = () => {
         } else {
             similarMoviesContent = (
                 <div>
-                    <Row className='justify-content-md-center'>
+                    <Row className='d-flex justify-content-center mx-1'>
                         <Col>
                             <h2>Similar movies</h2>
                             {similarMovies.map(movie => {
@@ -109,6 +109,7 @@ export const MainView = () => {
                                         onMovieClick={newSelectedMovie =>
                                             setSelectedMovie(newSelectedMovie)
                                         }
+                                        style={{width: '12rem', minHeight: '25rem'}}
                                     />
                                 );
                             })}
@@ -144,7 +145,7 @@ export const MainView = () => {
         <>
             <div>
                 <NavBar setUser={setUser} setToken={setToken} user={user}/>
-                <Row>
+                <Row className='mx-2'>
                     {movies.map(movie => {
                         return (
                             <Col key={movie.id} className='my-3 mx-2'>
