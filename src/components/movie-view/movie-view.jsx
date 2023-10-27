@@ -5,7 +5,7 @@ export const MovieView = ({ movieData, onBackClick, setUser, setToken, user }) =
         <div>
               <NavBar setUser={setUser} setToken={setToken} user={user}/>
               <Container fluid className='d-flex justify-content-center my-3  p-0'>
-                  <Row>
+                  <Row className='mx-2'>
                       <Col xs={12} md={3} lg={3}>
                           <Image
                              src={movieData.image}

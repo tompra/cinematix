@@ -142,10 +142,9 @@ export const MainView = () => {
         );
     }
     return (
-        <>
             <div>
                 <NavBar setUser={setUser} setToken={setToken} user={user}/>
-                <Row className='mx-2'>
+                <Row className='mx-2' >
                     {movies.map(movie => {
                         return (
                             <Col key={movie.id} className='my-3 mx-2'>
@@ -160,6 +159,5 @@ export const MainView = () => {
                     })}
                 </Row>
             </div>
-        </>
     );
 };
