@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
+import logo from "../../images/cinematix-logo.svg"
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
@@ -41,34 +42,43 @@ export const LoginView = ({ onLoggedIn }) => {
             });
     };
     return (
-        <>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId='formUsername'>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control
-                        type='text'
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                        minLength={5}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group controlId='formPassword'>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type='password'
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                        minLength={8}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group className='my-3 d-flex justify-content-center'>
-                    <Button type='submit' variant='primary'>
-                        Login
-                    </Button>
-                </Form.Group>
-            </Form>
-        </>
+        <div>
+            <Container>
+                <Row className='d-flex justify-content-center align-items-center'>
+                    <Col xs={12} md={6}>
+                        <Image src={logo} alt='Cinematix logo' className='img-fluid'/>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group controlId='formUsername'>
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control
+                                    type='text'
+                                    value={username}
+                                    onChange={e => setUsername(e.target.value)}
+                                    minLength={5}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group controlId='formPassword'>
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    type='password'
+                                    value={password}
+                                    onChange={e => setPassword(e.target.value)}
+                                    minLength={8}
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group className='my-3 d-flex justify-content-center'>
+                                <Button type='submit' variant='primary'>
+                                    Login
+                                </Button>
+                            </Form.Group>
+                        </Form>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     );
 };

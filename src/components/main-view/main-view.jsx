@@ -56,29 +56,31 @@ export const MainView = () => {
 
     if (!user) {
         return (
-            <Row className='d-flex justify-content-center'>
-                {isLoginView ? (
-                    <LoginView
-                        onLoggedIn={(user, token) => {
-                            setUser(user);
-                            setToken(token);
-                        }}
-                    />
-                ) : (
-                    <SignIn />
-                )}
-                <p className='text-center'>
-                    <a
-                        href='#'
-                        className='link-opacity-75-hover'
-                        onClick={toggleLoginView}
-                    >
-                        {isLoginView
-                            ? "Don't have an account"
-                            : 'I have an account already'}
-                    </a>
-                </p>
-            </Row>
+            <div>
+                <Row className='d-flex justify-content-center'>
+                    {isLoginView ? (
+                        <LoginView
+                            onLoggedIn={(user, token) => {
+                                setUser(user);
+                                setToken(token);
+                            }}
+                        />
+                    ) : (
+                        <SignIn />
+                    )}
+                    <p className='text-center'>
+                        <a
+                            href='#'
+                            className='link-opacity-75-hover'
+                            onClick={toggleLoginView}
+                        >
+                            {isLoginView
+                                ? "Don't have an account"
+                                : 'I have an account already'}
+                        </a>
+                    </p>
+                </Row>
+            </div>
         );
     }
 
@@ -95,7 +97,7 @@ export const MainView = () => {
             similarMoviesContent = <h2>There is no similar movies</h2>;
         } else {
             similarMoviesContent = (
-                <>
+                <div>
                     <Row className='justify-content-md-center'>
                         <Col>
                             <h2>Similar movies</h2>
@@ -112,49 +114,51 @@ export const MainView = () => {
                             })}
                         </Col>
                     </Row>
-                </>
+                </div>
             );
         }
         return (
-            <>
-                <Row className='justify-content-md-center'>
+            <div>
                     <MovieView
                         movieData={selectedMovie}
                         onBackClick={() => setSelectedMovie(null)}
                         setUser={setUser} 
                         setToken={setToken}
+                        user={user}
                     />
                     <hr />
                     {similarMoviesContent}
-                </Row>
-            </>
+                
+            </div>
         );
     }
 
     if (movies.length === 0) {
         return (
-            <Row>
-                <div>The list is empty!</div>
-            </Row>
+            <div>
+                <p> The list is empty!</p> 
+            </div>
         );
     }
     return (
-        <div>
-            <NavBar setUser={setUser} setToken={setToken} />
-            <Row>
-                {movies.map(movie => {
-                    return (
-                        <Col key={movie.id} className='my-3 mx-2'>
-                            <MovieCard
-                                movieData={movie}
-                                onMovieClick={newSelectedMovie =>
-                                    setSelectedMovie(newSelectedMovie)
-                                }
-                            />
-                        </Col>
-                    );
-                })}
-            </Row>
-        </div>
+        <>
+            <div>
+                <NavBar setUser={setUser} setToken={setToken} user={user}/>
+                <Row>
+                    {movies.map(movie => {
+                        return (
+                            <Col key={movie.id} className='my-3 mx-2'>
+                                <MovieCard
+                                    movieData={movie}
+                                    onMovieClick={newSelectedMovie =>
+                                        setSelectedMovie(newSelectedMovie)
+                                    }
+                                />
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </div>
+        </>
     );
 };

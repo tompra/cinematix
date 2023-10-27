@@ -7,7 +7,7 @@ const App = () => {
     return (
         <Container fluid
             style={{ minHeight: '100vh' }}
-            className='d-flex justify-content-center align-items-center'
+            className='d-flex justify-content-center align-items-center p-0'
         >
             <MainView />
         </Container>
