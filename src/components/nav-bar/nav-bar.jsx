@@ -3,10 +3,10 @@ import logo from '../../images/cinematix-logo.svg';
 
 export const NavBar = ({ setUser, setToken, user }) => {
     return (
-        <div>
+        <>
             <Navbar expand='lg' className='bg-primary'>
                 <Container fluid>
-                    <Navbar.Brand href='#home'>
+                    <Navbar.Brand href=''>
                         <Image
                             src={logo}
                             alt='cinematix logo'
@@ -22,7 +22,9 @@ export const NavBar = ({ setUser, setToken, user }) => {
                         >
                             <Navbar.Text>
                                 Signed in as:{' '}
-                                <a href='#login'>{user.username}</a>
+                                <a href=''>
+                                    {!user ? 'Sign in' : user.username}
+                                </a>
                             </Navbar.Text>
                             <Nav.Link
                                 href='#'
@@ -39,6 +41,6 @@ export const NavBar = ({ setUser, setToken, user }) => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-        </div>
+        </>
     );
 };
