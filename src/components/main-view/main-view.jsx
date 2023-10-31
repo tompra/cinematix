@@ -3,9 +3,10 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Row, Col, Button, Container } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { NavBar } from '../nav-bar/nav-bar';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ProfileView } from '../profile-view/profile-view';
 
 export const MainView = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -13,6 +14,7 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const [favoriteMovie, setFavoriteMovie] = useState();
 
     useEffect(() => {
         if (!token) {
@@ -131,11 +133,41 @@ export const MainView = () => {
                                                 >
                                                     <MovieCard
                                                         movieData={movie}
+                                                        user={user}
+                                                        setFavoriteMovie={
+                                                            setFavoriteMovie
+                                                        }
+                                                        favoriteMovie={
+                                                            favoriteMovie
+                                                        }
                                                     />
                                                 </Col>
                                             );
                                         })}
                                     </Row>
+                                </>
+                            )}
+                        </>
+                    }
+                />
+                <Route
+                    path='/users'
+                    element={
+                        <>
+                            {!user ? (
+                                <Navigate to={'/login'} replace />
+                            ) : (
+                                <>
+                                    <NavBar
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                    />
+                                    <ProfileView
+                                        setUser={setUser}
+                                        user={user}
+                                        token={token}
+                                    />
                                 </>
                             )}
                         </>

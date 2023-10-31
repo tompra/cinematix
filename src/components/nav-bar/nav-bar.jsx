@@ -1,5 +1,6 @@
 import { Navbar, Nav, Container, Image } from 'react-bootstrap';
 import logo from '../../images/cinematix-logo.svg';
+import { Link } from 'react-router-dom';
 
 export const NavBar = ({ setUser, setToken, user }) => {
     return (
@@ -21,10 +22,10 @@ export const NavBar = ({ setUser, setToken, user }) => {
                             style={{ width: '100%' }}
                         >
                             <Navbar.Text>
-                                Signed in as:{' '}
-                                <a href=''>
+                                Profile:
+                                <Link to='/users'>
                                     {!user ? 'No user' : user.username}
-                                </a>
+                                </Link>
                             </Navbar.Text>
                             <Nav.Link
                                 href='#'

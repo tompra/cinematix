@@ -1,9 +1,10 @@
 import Proptypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Heart from 'react-animated-heart';
 
-export const MovieCard = ({ movieData }) => {
-    console.log(movieData.id);
+export const MovieCard = ({ movieData, user, setFavoriteMovie }) => {
     return (
         <>
             <Card style={{ width: '18rem', minHeight: '36rem' }}>
@@ -17,7 +18,8 @@ export const MovieCard = ({ movieData }) => {
                     <Card.Subtitle className='mb-3'>
                         Directed by: {movieData.director.name}
                     </Card.Subtitle>
-                    <div className='text-center'>
+                    <div className='d-flex justify-content-around align-items-center'>
+                        <Button>Add to Favorite</Button>
                         <Link
                             to={`/movies/${encodeURIComponent(movieData.id)}}`}
                         >

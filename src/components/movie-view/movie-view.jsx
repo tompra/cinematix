@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 export const MovieView = ({ movieData }) => {
     const { movieID } = useParams();
     const movie = movieData.find((mov) => mov.id === parseInt(movieID));
-    console.log(movieData, 'movieData');
-    console.log(movie, 'movie');
     return (
         <>
             <Row className='mx-2'>
