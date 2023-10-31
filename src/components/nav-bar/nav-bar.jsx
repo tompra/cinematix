@@ -23,7 +23,7 @@ export const NavBar = ({ setUser, setToken, user }) => {
                             <Navbar.Text>
                                 Signed in as:{' '}
                                 <a href=''>
-                                    {!user ? 'Sign in' : user.username}
+                                    {!user ? 'No user' : user.username}
                                 </a>
                             </Navbar.Text>
                             <Nav.Link

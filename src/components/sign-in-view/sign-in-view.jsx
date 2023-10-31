@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
 import logo from '../../images/cinematix-logo.svg';
+import { Link } from 'react-router-dom';
 
 export const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -33,9 +34,12 @@ export const SignIn = () => {
         });
     };
     return (
-        <div>
-            <Container>
-                <Row className='d-flex justify-content-center align-items-center'>
+        <>
+            <Container
+                style={{ minHeight: '100vh' }}
+                className='d-flex justify-content-center align-items-center'
+            >
+                <Row>
                     <Col xs={12} md={6}>
                         <Image
                             src={logo}
@@ -43,7 +47,7 @@ export const SignIn = () => {
                             className='img-fluid'
                         />
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className='form--container'>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId='formUsername'>
                                 <Form.Label>Username</Form.Label>
@@ -96,8 +100,18 @@ export const SignIn = () => {
                             </Form.Group>
                         </Form>
                     </Col>
+                    <Col className='text-center'>
+                        <Link to={'/login'}>
+                            <Button
+                                className='link-opacity-75-hover'
+                                variant='link'
+                            >
+                                I have an account already
+                            </Button>
+                        </Link>
+                    </Col>
                 </Row>
             </Container>
-        </div>
+        </>
     );
 };

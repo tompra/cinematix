@@ -1,7 +1,7 @@
-import { Button, Container, Row, Col, Image } from 'react-bootstrap';
+import { Button, Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-export const MovieView = ({ movieData, setUser, setToken, user }) => {
+export const MovieView = ({ movieData }) => {
     const { movieID } = useParams();
     const movie = movieData.find((mov) => mov.id === parseInt(movieID));
     console.log(movieData, 'movieData');

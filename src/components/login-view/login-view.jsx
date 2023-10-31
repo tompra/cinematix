@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
 import logo from '../../images/cinematix-logo.svg';
+import { Link } from 'react-router-dom';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
@@ -27,7 +28,6 @@ export const LoginView = ({ onLoggedIn }) => {
                 }
             })
             .then((response) => {
-                console.log('Login response:', response);
                 if (response.user) {
                     localStorage.setItem('user', JSON.stringify(response.user));
                     localStorage.setItem('token', response.token);
@@ -42,9 +42,12 @@ export const LoginView = ({ onLoggedIn }) => {
             });
     };
     return (
-        <div>
-            <Container>
-                <Row className='d-flex justify-content-center align-items-center'>
+        <>
+            <Container
+                style={{ minHeight: '100vh' }}
+                className='d-flex justify-content-center align-items-center'
+            >
+                <Row>
                     <Col xs={12} md={6}>
                         <Image
                             src={logo}
@@ -52,7 +55,7 @@ export const LoginView = ({ onLoggedIn }) => {
                             className='img-fluid'
                         />
                     </Col>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className='form--container'>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group controlId='formUsername'>
                                 <Form.Label>Username</Form.Label>
@@ -85,8 +88,18 @@ export const LoginView = ({ onLoggedIn }) => {
                             </Form.Group>
                         </Form>
                     </Col>
+                    <Col className='text-center'>
+                        <Link to={'/signin'}>
+                            <Button
+                                className='link-opacity-75-hover'
+                                variant='link'
+                            >
+                                Don't have an account
+                            </Button>
+                        </Link>
+                    </Col>
                 </Row>
             </Container>
-        </div>
+        </>
     );
 };

@@ -3,7 +3,7 @@ import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Button, Container } from 'react-bootstrap';
 import { NavBar } from '../nav-bar/nav-bar';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -13,7 +13,6 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
-    const [isLoginView, setLoginView] = useState(true);
 
     useEffect(() => {
         if (!token) {
@@ -50,120 +49,80 @@ export const MainView = () => {
             .catch((err) => console.error(err));
     }, [token]);
 
-    const toggleLoginView = () => {
-        setLoginView(!isLoginView);
-    };
-
     return (
         <BrowserRouter>
-            {/* <NavBar setUser={setUser} setToken={setToken} user={user} /> */}
-            <Row className='d-flex justify-content-center'>
-                <Routes>
-                    <Route
-                        path='/login'
-                        element={
-                            user ? (
-                                <Navigate to='/movies' />
-                            ) : (
-                                <>
-                                    {isLoginView ? (
-                                        <LoginView
-                                            onLoggedIn={(user, token) => {
-                                                setUser(user);
-                                                setToken(token);
-                                            }}
-                                        />
-                                    ) : (
-                                        <SignIn />
-                                    )}
-                                    <Col className='d-flex justify-content-center'>
-                                        <Button
-                                            className='link-opacity-75-hover'
-                                            variant='link'
-                                            onClick={toggleLoginView}
-                                        >
-                                            {isLoginView
-                                                ? "Don't have an account"
-                                                : 'I have an account already'}
-                                        </Button>
-                                    </Col>
-                                </>
-                            )
-                        }
-                    />
-                    <Route
-                        path='/signin'
-                        element={
-                            user ? (
-                                <Navigate to='/movies' />
-                            ) : (
-                                <>
-                                    {isLoginView ? (
-                                        <LoginView
-                                            onLoggedIn={(user, token) => {
-                                                setUser(user);
-                                                setToken(token);
-                                            }}
-                                        />
-                                    ) : (
-                                        <SignIn />
-                                    )}
-                                    <Col className='d-flex justify-content-center'>
-                                        <Button
-                                            className='link-opacity-75-hover'
-                                            variant='link'
-                                            onClick={toggleLoginView}
-                                        >
-                                            {isLoginView
-                                                ? "Don't have an account"
-                                                : 'I have an account already'}
-                                        </Button>
-                                    </Col>
-                                </>
-                            )
-                        }
-                    />
-                    <Route
-                        path='/movies/:movieID'
-                        element={
+            <Routes>
+                <Route
+                    path='/login'
+                    element={
+                        user ? (
+                            <Navigate to='/movies' />
+                        ) : (
                             <>
-                                {!user ? (
-                                    <Navigate to='/login' replace />
-                                ) : movies.length === 0 ? (
-                                    <Col> The list is empty!</Col>
-                                ) : (
-                                    <>
-                                        <NavBar
-                                            setUser={setUser}
-                                            setToken={setToken}
-                                            user={user}
-                                        />
-                                        <MovieView
-                                            movieData={movies}
-                                            setUser={setUser}
-                                            setToken={setToken}
-                                            user={user}
-                                        />
-                                    </>
-                                )}
+                                <LoginView
+                                    onLoggedIn={(user, token) => {
+                                        setUser(user);
+                                        setToken(token);
+                                    }}
+                                />
                             </>
-                        }
-                    />
-                    <Route
-                        path='/movies'
-                        element={
+                        )
+                    }
+                />
+                <Route
+                    path='/signin'
+                    element={
+                        user ? (
+                            <Navigate to='/movies' />
+                        ) : (
                             <>
-                                {!user ? (
-                                    <Navigate to={'/login'} />
-                                ) : movies.length === 0 ? (
-                                    <Col> The list is empty!</Col>
-                                ) : (
-                                    <Row className='mx-2'>
-                                        <NavBar
-                                            setUser={setUser}
-                                            setToken={setToken}
-                                            user={user}
-                                        />
+                                <SignIn />
+                            </>
+                        )
+                    }
+                />
+                <Route
+                    path='/movies/:movieID'
+                    element={
+                        <>
+                            {!user ? (
+                                <Navigate to='/login' replace />
+                            ) : movies.length === 0 ? (
+                                <Col> The list is empty!</Col>
+                            ) : (
+                                <>
+                                    <NavBar
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                    />
+                                    <MovieView
+                                        movieData={movies}
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                    />
+                                </>
+                            )}
+                        </>
+                    }
+                />
+                <Route
+                    path='/movies'
+                    element={
+                        <>
+                            {!user ? (
+                                <Navigate to={'/login'} />
+                            ) : movies.length === 0 ? (
+                                <Col> The list is empty!</Col>
+                            ) : (
+                                <>
+                                    <NavBar
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                    />
+                                    <Row>
                                         {movies.map((movie) => {
                                             return (
                                                 <Col
@@ -177,12 +136,12 @@ export const MainView = () => {
                                             );
                                         })}
                                     </Row>
-                                )}
-                            </>
-                        }
-                    />
-                </Routes>
-            </Row>
+                                </>
+                            )}
+                        </>
+                    }
+                />
+            </Routes>
         </BrowserRouter>
     );
 };
