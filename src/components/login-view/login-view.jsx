@@ -22,6 +22,7 @@ export const LoginView = ({ onLoggedIn }) => {
         })
             .then((response) => {
                 if (!response.ok) {
+                    alert('Username or Password incorrect!');
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 } else {
                     return response.json();

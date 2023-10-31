@@ -1,12 +1,34 @@
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MovieCard } from '../movie-card/movie-card';
 
-export const ProfileView = ({ setUser, user, favoriteMovies, token }) => {
+export const ProfileView = ({ setUser, user, token, movieData }) => {
     const [username, setUsername] = useState(user.username);
     const [password, setPassword] = useState(user.password);
     const [email, setEmail] = useState(user.email);
     const [birthday, setBirthday] = useState(user.birthday);
+
+    const favMovies = user.favoriteMovies
+        ? movieData.filter((movie) => user.favoriteMovies.includes(movie.id))
+        : [];
+
+    const handleDelete = () => {
+        fetch(`https://popcornhub-api.onrender.com/users/${user.username}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => {
+            if (response.ok) {
+                setUser(null);
+                alert('Your account has been deleted');
+            } else {
+                alert('Something went wrong when deleting account');
+            }
+        });
+    };
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -16,7 +38,6 @@ export const ProfileView = ({ setUser, user, favoriteMovies, token }) => {
             email: email,
             birthday: birthday,
         };
-        console.log('DATA', data);
         fetch(`https://popcornhub-api.onrender.com/users/${user.username}`, {
             method: 'PUT',
             body: JSON.stringify(data),
@@ -26,18 +47,18 @@ export const ProfileView = ({ setUser, user, favoriteMovies, token }) => {
             },
         })
             .then(async (response) => {
-                console.log(response);
                 if (response.ok) {
-                    response.json();
+                    alert('Update succesful');
+                    return response.json();
                 } else {
-                    console.log(response.text());
+                    console.log(await response.text());
                     alert('Update failed');
                 }
             })
             .then(async (updateData) => {
                 if (updateData) {
-                    console.log(updateData);
-                    alert('Update succesful');
+                    localStorage.setItem('user', JSON.stringify(updateData));
+                    setUser(updateData);
                 }
             })
             .catch((err) => {
@@ -107,11 +128,29 @@ export const ProfileView = ({ setUser, user, favoriteMovies, token }) => {
                 </Col>
                 <Row>
                     <Link to='/login'>
-                        <Button className='warning'>Delete account</Button>
+                        <Button className='btn-danger' onClick={handleDelete}>
+                            Delete account
+                        </Button>
                     </Link>
-                    <Link to={`/movies`}>
+                    <Link to={'/'}>
                         <Button>Back</Button>
                     </Link>
+                </Row>
+                <Row>
+                    <h1>Favorite Movies</h1>
+                    {favMovies.length === 0 ? (
+                        <h2>No favorite movies added yet.</h2>
+                    ) : (
+                        favMovies.map((movie) => (
+                            <MovieCard
+                                key={movie.id}
+                                movieData={movie}
+                                token={token}
+                                setUser={setUser}
+                                user={user}
+                            />
+                        ))
+                    )}
                 </Row>
             </Container>
         </>

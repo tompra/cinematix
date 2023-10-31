@@ -52,7 +52,7 @@ export const MovieView = ({ movieData }) => {
                     </Row>
                 </Col>
                 <Row>
-                    <Link to={'/movies'}>
+                    <Link to={'/'}>
                         <Col className='d-flex justify-content-center'>
                             <Button>Back</Button>
                         </Col>

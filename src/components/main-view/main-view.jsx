@@ -14,7 +14,6 @@ export const MainView = () => {
     const [movies, setMovies] = useState([]);
     const [user, setUser] = useState(storedUser ? storedUser : null);
     const [token, setToken] = useState(storedToken ? storedToken : null);
-    const [favoriteMovie, setFavoriteMovie] = useState();
 
     useEffect(() => {
         if (!token) {
@@ -26,27 +25,27 @@ export const MainView = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                const moviesFromAPI = data.map((movie, index) => {
-                    return {
-                        id: index + 1,
-                        title: movie.title,
-                        description: movie.description,
-                        director: {
-                            name: movie.director.name,
-                            bio: movie.director.bio,
-                            birth: movie.director.birth,
-                            death: movie.director.death,
-                        },
-                        genre: {
-                            name: movie.genre.name,
-                            description: movie.genre.description,
-                        },
-                        image: movie.imageUrl,
-                        actors: movie.actors,
-                        featured: movie.featured,
-                    };
-                });
-                setMovies(moviesFromAPI);
+                // const moviesFromAPI = data.map((movie, index) => {
+                //     return {
+                //         id: index + 1,
+                //         title: movie.title,
+                //         description: movie.description,
+                //         director: {
+                //             name: movie.director.name,
+                //             bio: movie.director.bio,
+                //             birth: movie.director.birth,
+                //             death: movie.director.death,
+                //         },
+                //         genre: {
+                //             name: movie.genre.name,
+                //             description: movie.genre.description,
+                //         },
+                //         image: movie.imageUrl,
+                //         actors: movie.actors,
+                //         featured: movie.featured,
+                //     };
+                // });
+                setMovies(data);
             })
             .catch((err) => console.error(err));
     }, [token]);
@@ -58,7 +57,7 @@ export const MainView = () => {
                     path='/login'
                     element={
                         user ? (
-                            <Navigate to='/movies' />
+                            <Navigate to='/' />
                         ) : (
                             <>
                                 <LoginView
@@ -75,7 +74,7 @@ export const MainView = () => {
                     path='/signin'
                     element={
                         user ? (
-                            <Navigate to='/movies' />
+                            <Navigate to='/' />
                         ) : (
                             <>
                                 <SignIn />
@@ -110,11 +109,11 @@ export const MainView = () => {
                     }
                 />
                 <Route
-                    path='/movies'
+                    path='/'
                     element={
                         <>
                             {!user ? (
-                                <Navigate to={'/login'} />
+                                <Navigate to={'/login'} replace />
                             ) : movies.length === 0 ? (
                                 <Col> The list is empty!</Col>
                             ) : (
@@ -134,12 +133,8 @@ export const MainView = () => {
                                                     <MovieCard
                                                         movieData={movie}
                                                         user={user}
-                                                        setFavoriteMovie={
-                                                            setFavoriteMovie
-                                                        }
-                                                        favoriteMovie={
-                                                            favoriteMovie
-                                                        }
+                                                        token={token}
+                                                        setUser={setUser}
                                                     />
                                                 </Col>
                                             );
@@ -167,6 +162,7 @@ export const MainView = () => {
                                         setUser={setUser}
                                         user={user}
                                         token={token}
+                                        movieData={movies}
                                     />
                                 </>
                             )}
