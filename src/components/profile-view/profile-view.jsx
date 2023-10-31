@@ -10,7 +10,7 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
     const [birthday, setBirthday] = useState(user.birthday);
 
     const favMovies = user.favoriteMovies
-        ? movieData.filter((movie) => user.favoriteMovies.includes(movie.id))
+        ? movieData.filter((movie) => user.favoriteMovies.includes(movie._id))
         : [];
 
     const handleDelete = () => {
@@ -67,12 +67,13 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
     };
     return (
         <>
-            <Container style={{ minHeight: '100vh' }}>
-                <Col>
-                    <h1>Update information</h1>
-                </Col>
-                <Col>
-                    <Row xs={12} md={6} className='form--container'>
+            <Container
+                className='d-flex flex-column align-items-center'
+                style={{ minHeight: '100vh' }}
+            >
+                <h1>Update information</h1>
+                <Row xs={12} md={6} className='form--container'>
+                    <Col xs={12} style={{ width: '30rem' }}>
                         <Form onSubmit={handleUpdate}>
                             <Form.Group controlId='formUsername'>
                                 <Form.Label>Username</Form.Label>
@@ -119,36 +120,42 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
                                 />
                             </Form.Group>
                             <Form.Group className='my-3 d-flex justify-content-center'>
-                                <Button type='submit' variant='primary'>
+                                <Button
+                                    type='submit'
+                                    variant='primary'
+                                    className='mx-2'
+                                >
                                     Update
                                 </Button>
+                                <Link to='/login'>
+                                    <Button
+                                        className='btn-danger mx-2'
+                                        onClick={handleDelete}
+                                    >
+                                        Delete account
+                                    </Button>
+                                </Link>
+                                <Link to={'/'}>
+                                    <Button className='mx-2'>Back</Button>
+                                </Link>
                             </Form.Group>
                         </Form>
-                    </Row>
-                </Col>
-                <Row>
-                    <Link to='/login'>
-                        <Button className='btn-danger' onClick={handleDelete}>
-                            Delete account
-                        </Button>
-                    </Link>
-                    <Link to={'/'}>
-                        <Button>Back</Button>
-                    </Link>
+                    </Col>
                 </Row>
-                <Row>
-                    <h1>Favorite Movies</h1>
+                <Row className='my-2'>
+                    <h1 className='text-center'>Favorite Movies</h1>
                     {favMovies.length === 0 ? (
                         <h2>No favorite movies added yet.</h2>
                     ) : (
                         favMovies.map((movie) => (
-                            <MovieCard
-                                key={movie.id}
-                                movieData={movie}
-                                token={token}
-                                setUser={setUser}
-                                user={user}
-                            />
+                            <Col key={movie.id}>
+                                <MovieCard
+                                    movieData={movie}
+                                    token={token}
+                                    setUser={setUser}
+                                    user={user}
+                                />
+                            </Col>
                         ))
                     )}
                 </Row>

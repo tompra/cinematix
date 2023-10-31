@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 export const NavBar = ({ setUser, setToken, user }) => {
     return (
         <>
-            <Navbar expand='lg' className='bg-primary'>
+            <Navbar expand='lg' className='bg-primary navbar-with-shadow'>
                 <Container fluid>
-                    <Navbar.Brand href=''>
+                    <Navbar.Brand href='' className='text-light'>
                         <Image
                             src={logo}
                             alt='cinematix logo'
@@ -21,15 +21,18 @@ export const NavBar = ({ setUser, setToken, user }) => {
                             className='justify-content-end'
                             style={{ width: '100%' }}
                         >
-                            <Navbar.Text>
-                                Profile:
-                                <Link to='/users'>
+                            <Nav.Link as={Link} to={'/'} className='text-light'>
+                                Home
+                            </Nav.Link>
+                            <Navbar.Text className='text-light'>
+                                Profile: &nbsp;
+                                <Link to='/users' className='text-light'>
                                     {!user ? 'No user' : user.username}
                                 </Link>
                             </Navbar.Text>
                             <Nav.Link
-                                href='#'
-                                className='fw-bold'
+                                as={Link}
+                                className='fw-bold text-light'
                                 onClick={() => {
                                     setUser(null);
                                     setToken(null);

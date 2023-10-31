@@ -5,54 +5,70 @@ import { useState, useEffect } from 'react';
 import Heart from 'react-animated-heart';
 
 export const MovieCard = ({ movieData, user, setUser, token }) => {
-    const [isclick, setClick] = useState(false);
     const [favoriteMovie, setFavoriteMovie] = useState(false);
+
+    useEffect(() => {
+        if (
+            user.favoriteMovies &&
+            user.favoriteMovies.includes(movieData._id)
+        ) {
+            setFavoriteMovie(true);
+        } else {
+            setFavoriteMovie(false);
+        }
+    }, [user]);
 
     const addFavoriteMovie = () => {
         fetch(
-            `https://popcornhub-api.onrender.com/users/${user.username}/movies/${movieData.id}`,
+            `https://popcornhub-api.onrender.com/users/${user.username}/movies/${movieData._id}`,
             {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-type': 'application/json',
                 },
             }
         )
             .then((response) => {
-                console.log(response);
-                if (response.ok) {
-                    return response.json();
-                } else {
+                if (!response.ok) {
                     alert('Failed to add favorite movie');
+                    throw new Error('Failed to add favorite movie');
+                } else {
+                    return response.json();
                 }
             })
             .then((user) => {
-                console.log(user);
+                console.log('add favorite', user);
+                setFavoriteMovie(true);
+                setUser(user);
+                localStorage.setItem('user', JSON.stringify(user));
             })
             .catch((err) => console.error(err));
     };
 
     const removeFavoriteMovie = () => {
         fetch(
-            `https://popcornhub-api.onrender.com/users/${user.username}/movies/${movieData.id}`,
+            `https://popcornhub-api.onrender.com/users/${user.username}/movies/${movieData._id}`,
             {
                 method: 'DELETE',
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    'Content-type': 'application/json',
                 },
             }
         )
             .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
+                if (!response.ok) {
                     alert('Failed to remove favorite movie');
+                    throw new Error('Failed to remove favorite movie');
+                } else {
+                    alert('Movie deleted succesfully');
+                    return response.json();
                 }
             })
             .then((user) => {
-                console.log(user);
+                console.log('remove favorite', movieData._id);
+                setFavoriteMovie(false);
+                setUser(user);
+                localStorage.setItem('user', JSON.stringify(user));
             })
             .catch((err) => console.error(err));
     };
@@ -61,7 +77,7 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
             <Card style={{ width: '18rem', minHeight: '36rem' }}>
                 <Card.Img
                     variant='top'
-                    src={movieData.image}
+                    src={movieData.imageUrl}
                     className='card--img'
                 />
                 <Card.Body>
@@ -70,21 +86,19 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                         Directed by: {movieData.director.name}
                     </Card.Subtitle>
                     <div className='d-flex justify-content-around align-items-center'>
-                        {/* <Heart
-                            isClick={isclick}
-                            onClick={() => setClick(!isclick)}
-                        /> */}
-                        {favoriteMovie ? (
-                            <Button onClick={removeFavoriteMovie}>
-                                Remove from Favorites
-                            </Button>
-                        ) : (
-                            <Button onClick={addFavoriteMovie}>
-                                Add to Favorites
-                            </Button>
-                        )}
+                        <Heart
+                            isClick={favoriteMovie}
+                            onClick={() => {
+                                if (favoriteMovie) {
+                                    removeFavoriteMovie();
+                                } else {
+                                    addFavoriteMovie();
+                                }
+                            }}
+                        />
+
                         <Link
-                            to={`/movies/${encodeURIComponent(movieData.id)}}`}
+                            to={`/movies/${encodeURIComponent(movieData._id)}`}
                         >
                             <Button>Open</Button>
                         </Link>
@@ -99,7 +113,7 @@ MovieCard.propTypes = {
     movieData: Proptypes.shape({
         title: Proptypes.string.isRequired,
         description: Proptypes.string.isRequired,
-        image: Proptypes.string.isRequired,
+        imageUrl: Proptypes.string.isRequired,
         director: Proptypes.shape({
             name: Proptypes.string.isRequired,
             bio: Proptypes.string.isRequired,

@@ -1,15 +1,17 @@
+import React from 'react';
 import { Button, Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 export const MovieView = ({ movieData }) => {
-    const { movieID } = useParams();
-    const movie = movieData.find((mov) => mov.id === parseInt(movieID));
+    const { movieId } = useParams();
+    const movie = movieData.find((mov) => mov._id === movieId);
+    console.log('movieId', movieId);
     return (
         <>
             <Row className='mx-2'>
                 <Col xs={12} md={3} lg={3}>
                     <Image
-                        src={movie.image}
+                        src={movie.imageUrl}
                         alt='Movie Poster'
                         className='img-fluid'
                     />

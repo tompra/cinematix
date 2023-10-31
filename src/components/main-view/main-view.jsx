@@ -9,10 +9,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProfileView } from '../profile-view/profile-view';
 
 export const MainView = () => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(storedUser ? storedUser : null);
+    const [user, setUser] = useState(
+        storedUser ? JSON.parse(storedUser) : null
+    );
     const [token, setToken] = useState(storedToken ? storedToken : null);
 
     useEffect(() => {
@@ -24,29 +26,7 @@ export const MainView = () => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
-            .then((data) => {
-                // const moviesFromAPI = data.map((movie, index) => {
-                //     return {
-                //         id: index + 1,
-                //         title: movie.title,
-                //         description: movie.description,
-                //         director: {
-                //             name: movie.director.name,
-                //             bio: movie.director.bio,
-                //             birth: movie.director.birth,
-                //             death: movie.director.death,
-                //         },
-                //         genre: {
-                //             name: movie.genre.name,
-                //             description: movie.genre.description,
-                //         },
-                //         image: movie.imageUrl,
-                //         actors: movie.actors,
-                //         featured: movie.featured,
-                //     };
-                // });
-                setMovies(data);
-            })
+            .then((data) => setMovies(data))
             .catch((err) => console.error(err));
     }, [token]);
 
@@ -83,7 +63,7 @@ export const MainView = () => {
                     }
                 />
                 <Route
-                    path='/movies/:movieID'
+                    path='/movies/:movieId'
                     element={
                         <>
                             {!user ? (
@@ -125,10 +105,11 @@ export const MainView = () => {
                                     />
                                     <Row>
                                         {movies.map((movie) => {
+                                            console.log(movie._id);
                                             return (
                                                 <Col
-                                                    key={movie.id}
                                                     className='my-3 mx-2'
+                                                    key={movie._id}
                                                 >
                                                     <MovieCard
                                                         movieData={movie}
