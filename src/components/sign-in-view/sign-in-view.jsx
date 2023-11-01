@@ -8,6 +8,7 @@ export const SignIn = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -23,15 +24,25 @@ export const SignIn = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then((response) => {
-            console.log('DATA', data);
-            if (response.ok) {
-                alert('Signup sucessful');
-                window.location.reload();
-            } else {
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    console.error(
+                        `Signup failed with status: ${response.status}`
+                    );
+                    return response.text().then((text) => {
+                        console.error(`Error response: ${text}`);
+                        throw Error(`There was an error signing up the user`);
+                    });
+                } else {
+                    alert('Signup successful');
+                    window.location.replace('/login');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
                 alert('Signup failed');
-            }
-        });
+            });
     };
     return (
         <>

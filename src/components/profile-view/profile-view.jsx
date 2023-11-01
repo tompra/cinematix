@@ -18,11 +18,12 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
             },
         }).then((response) => {
+            console.log(response);
             if (response.ok) {
                 setUser(null);
+                localStorage.clear();
                 alert('Your account has been deleted');
             } else {
                 alert('Something went wrong when deleting account');
@@ -68,7 +69,7 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
     return (
         <>
             <Container
-                className='d-flex flex-column align-items-center'
+                className='d-flex flex-column align-items-center my-3'
                 style={{ minHeight: '100vh' }}
             >
                 <h1>Update information</h1>
@@ -142,13 +143,16 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
                         </Form>
                     </Col>
                 </Row>
-                <Row className='my-2'>
-                    <h1 className='text-center'>Favorite Movies</h1>
+                <Row className='my-3'>
+                    <h1 className='text-center my-4'>Favorite Movies</h1>
                     {favMovies.length === 0 ? (
                         <h2>No favorite movies added yet.</h2>
                     ) : (
                         favMovies.map((movie) => (
-                            <Col key={movie.id}>
+                            <Col
+                                key={movie.id}
+                                className='d-flex justify-content-center '
+                            >
                                 <MovieCard
                                     movieData={movie}
                                     token={token}
