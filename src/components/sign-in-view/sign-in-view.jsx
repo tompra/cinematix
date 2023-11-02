@@ -2,12 +2,24 @@ import { useState } from 'react';
 import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
 import logo from '../../images/cinematix-logo.svg';
 import { Link } from 'react-router-dom';
+import { MessageModal } from '../message-modal/message-modal';
 
 export const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
+    const [messageModal, setMessageModal] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const showMessage = (message) => {
+        setMessage(message);
+        setMessageModal(true);
+    };
+
+    const closeMessage = () => {
+        setMessageModal(false);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,31 +39,24 @@ export const SignIn = () => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    console.error(
-                        `Signup failed with status: ${response.status}`
-                    );
-                    return response.text().then((text) => {
-                        console.error(`Error response: ${text}`);
-                        throw Error(`There was an error signing up the user`);
-                    });
+                    showMessage('Something went wrong!');
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 } else {
-                    alert('Signup successful');
+                    showMessage("You're signed in!");
                     window.location.replace('/login');
                 }
             })
             .catch((error) => {
                 console.error(error);
-                alert('Signup failed');
+                showMessage('Something went wrong!');
             });
     };
     return (
         <>
-            <Container
-                style={{ minHeight: '100vh' }}
-                className='d-flex justify-content-center align-items-center'
-            >
+            <Container className='user__form--container'>
+                <Row className='user__box--container'></Row>
                 <Row>
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} className='text-center'>
                         <Image
                             src={logo}
                             alt='Cinematix logo'
@@ -84,7 +89,7 @@ export const SignIn = () => {
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group controlId='formEmail'>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type='email'
@@ -93,7 +98,7 @@ export const SignIn = () => {
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group controlId='formBirthday'>
                                 <Form.Label>Birthday</Form.Label>
                                 <Form.Control
                                     type='date'
@@ -104,24 +109,29 @@ export const SignIn = () => {
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group className='my-3 d-flex justify-content-center'>
+                            <Form.Group className='d-flex justify-content-center my-3'>
                                 <Button type='submit' variant='primary'>
                                     Signup
                                 </Button>
                             </Form.Group>
                         </Form>
-                    </Col>
-                    <Col className='text-center'>
-                        <Link to={'/login'}>
-                            <Button
-                                className='link-opacity-75-hover'
-                                variant='link'
-                            >
-                                I have an account already
-                            </Button>
-                        </Link>
+                        <div className='text-center'>
+                            <Link to={'/login'}>
+                                <Button
+                                    className='link-opacity-75-hover text-decoration-none'
+                                    variant='link'
+                                >
+                                    I have an account already
+                                </Button>
+                            </Link>
+                        </div>
                     </Col>
                 </Row>
+                <MessageModal
+                    show={messageModal}
+                    message={message}
+                    onHide={closeMessage}
+                />
             </Container>
         </>
     );

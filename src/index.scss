@@ -1,10 +1,28 @@
 @import '~bootstrap/scss/bootstrap.scss';
+$color-primary: #96cdff;
 .movie-billboard {
     width: 75%;
     height: 75%;
 }
 .navbar--logo {
     width: 4rem;
+}
+.user__form--container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.user__update--container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer--container {
+    background-color: $color-primary;
+    min-height: 10rem;
 }
 .card--img:hover {
     opacity: 0.8;
@@ -13,7 +31,21 @@
     max-width: 100%;
     margin: auto 0;
 }
-.navbar-with-shadow {
+.update--container {
+    max-width: 100%;
+}
+.navbar--container {
+    background: $color-primary;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.user__box--container {
+    width: 60%;
+    height: 60%;
+    background: $color-primary;
+    z-index: -1;
+    position: absolute;
+    border-radius: 5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }

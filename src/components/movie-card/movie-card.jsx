@@ -6,7 +6,6 @@ import Heart from 'react-animated-heart';
 
 export const MovieCard = ({ movieData, user, setUser, token }) => {
     const [favoriteMovie, setFavoriteMovie] = useState(false);
-    console.log('user', user);
     useEffect(() => {
         if (
             user.favoriteMovies &&
@@ -80,7 +79,7 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                     src={movieData.imageUrl}
                     className='card--img'
                 />
-                <Card.Body>
+                <Card.Body style={{ backgroundColor: '#96cdff' }}>
                     <Card.Title className='mb-3'>{movieData.title}</Card.Title>
                     <Card.Subtitle className='mb-3'>
                         Directed by: {movieData.director.name}

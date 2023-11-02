@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import { NavBar } from '../nav-bar/nav-bar';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProfileView } from '../profile-view/profile-view';
+import { FooterView } from '../footer-view/footer-view';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -16,6 +17,7 @@ export const MainView = () => {
         storedUser ? JSON.parse(storedUser) : null
     );
     const [token, setToken] = useState(storedToken ? storedToken : null);
+
     const similarMovies = (selectedMovie) => {
         return movies.filter((movie) => {
             return (
@@ -91,6 +93,7 @@ export const MainView = () => {
                                         user={user}
                                         token={token}
                                     />
+                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -111,9 +114,8 @@ export const MainView = () => {
                                         setToken={setToken}
                                         user={user}
                                     />
-                                    <Row>
+                                    <Row className='my-2'>
                                         {movies.map((movie) => {
-                                            console.log(movie._id);
                                             return (
                                                 <Col
                                                     className='my-3 mx-2'
@@ -129,6 +131,7 @@ export const MainView = () => {
                                             );
                                         })}
                                     </Row>
+                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -153,6 +156,7 @@ export const MainView = () => {
                                         token={token}
                                         movieData={movies}
                                     />
+                                    <FooterView />
                                 </>
                             )}
                         </>

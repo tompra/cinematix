@@ -9,7 +9,6 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
     const movie = movieData.find((mov) => mov._id === movieId);
     const setSimilarMovies = similarMovies(movie);
 
-    console.log(setSimilarMovies);
     return (
         <>
             <Row className='mx-2 my-3'>
@@ -79,6 +78,7 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
                     </Col>
                 </Row>
             )}
+            <Row></Row>
         </>
     );
 };
