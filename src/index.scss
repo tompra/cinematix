@@ -1,42 +1,19 @@
-$btn-primary: #2ea44f;
-$btn-secondary: #17a0ce;
-
+@import '~bootstrap/scss/bootstrap.scss';
 .movie-billboard {
-    width: 15%;
+    width: 75%;
+    height: 75%;
 }
-.btn--movie__title {
-    margin: 15px;
+.navbar--logo {
+    width: 4rem;
 }
-.movie--details__container {
-    margin: 10px 0;
+.card--img:hover {
+    opacity: 0.8;
 }
-.movie--details__title {
-    font-weight: 800;
+.form--container {
+    max-width: 100%;
+    margin: auto 0;
 }
-button {
-    appearance: none;
-    background-color: $btn-primary;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    padding: 6px 16px;
-    margin: 0 10px;
-}
-
-button:hover {
-    background-color: darken($btn-primary, 10%);
-    box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
-}
-
-#btnLogout {
-    background-color: $btn-secondary;
-}
-
-#btnLogout:hover {
-    background-color: darken($btn-secondary, 10%);
+.navbar-with-shadow {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
