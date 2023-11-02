@@ -6,7 +6,7 @@ import Heart from 'react-animated-heart';
 
 export const MovieCard = ({ movieData, user, setUser, token }) => {
     const [favoriteMovie, setFavoriteMovie] = useState(false);
-
+    console.log('user', user);
     useEffect(() => {
         if (
             user.favoriteMovies &&
@@ -16,7 +16,7 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
         } else {
             setFavoriteMovie(false);
         }
-    }, [user]);
+    }, [user, movieData]);
 
     const addFavoriteMovie = () => {
         fetch(

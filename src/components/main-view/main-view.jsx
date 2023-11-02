@@ -16,6 +16,14 @@ export const MainView = () => {
         storedUser ? JSON.parse(storedUser) : null
     );
     const [token, setToken] = useState(storedToken ? storedToken : null);
+    const similarMovies = (selectedMovie) => {
+        return movies.filter((movie) => {
+            return (
+                selectedMovie.genre.name === movie.genre.name &&
+                selectedMovie.title !== movie.title
+            );
+        });
+    };
 
     useEffect(() => {
         if (!token) {
@@ -79,9 +87,9 @@ export const MainView = () => {
                                     />
                                     <MovieView
                                         movieData={movies}
-                                        setUser={setUser}
-                                        setToken={setToken}
+                                        similarMovies={similarMovies}
                                         user={user}
+                                        token={token}
                                     />
                                 </>
                             )}
