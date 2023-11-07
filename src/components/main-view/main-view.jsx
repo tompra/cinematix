@@ -1,31 +1,23 @@
 import { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
 import { SignIn } from '../sign-in-view/sign-in-view';
-import { Row, Col } from 'react-bootstrap';
 import { NavBar } from '../nav-bar/nav-bar';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ProfileView } from '../profile-view/profile-view';
 import { FooterView } from '../footer-view/footer-view';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
+    const initUser = storedUser ? JSON.parse(storedUser) : null;
+    const initToken = storedToken ? storedToken : null;
     const [movies, setMovies] = useState([]);
-    const [user, setUser] = useState(
-        storedUser ? JSON.parse(storedUser) : null
-    );
-    const [token, setToken] = useState(storedToken ? storedToken : null);
-
-    const similarMovies = (selectedMovie) => {
-        return movies.filter((movie) => {
-            return (
-                selectedMovie.genre.name === movie.genre.name &&
-                selectedMovie.title !== movie.title
-            );
-        });
-    };
+    const [initialMovies, setInitialMovies] = useState([]);
+    const [user, setUser] = useState(initUser);
+    const [token, setToken] = useState(initToken);
 
     useEffect(() => {
         if (!token) {
@@ -36,9 +28,34 @@ export const MainView = () => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
-            .then((data) => setMovies(data))
+            .then((data) => {
+                setMovies(data);
+                setInitialMovies(data);
+            })
             .catch((err) => console.error(err));
     }, [token]);
+
+    const similarMovies = (selectedMovie) => {
+        return movies.filter((movie) => {
+            return (
+                selectedMovie.genre.name === movie.genre.name &&
+                selectedMovie.title !== movie.title
+            );
+        });
+    };
+
+    const searchMovies = (userInput) => {
+        if (userInput === '') {
+            setMovies(initialMovies);
+        } else {
+            const filterMovies = movies.filter((movie) => {
+                return movie.title
+                    .toLowerCase()
+                    .includes(userInput.toLowerCase());
+            });
+            setMovies(filterMovies);
+        }
+    };
 
     return (
         <BrowserRouter>
@@ -49,14 +66,14 @@ export const MainView = () => {
                         user ? (
                             <Navigate to='/' />
                         ) : (
-                            <>
+                            <div>
                                 <LoginView
                                     onLoggedIn={(user, token) => {
                                         setUser(user);
                                         setToken(token);
                                     }}
                                 />
-                            </>
+                            </div>
                         )
                     }
                 />
@@ -66,9 +83,9 @@ export const MainView = () => {
                         user ? (
                             <Navigate to='/' />
                         ) : (
-                            <>
+                            <div>
                                 <SignIn />
-                            </>
+                            </div>
                         )
                     }
                 />
@@ -79,13 +96,22 @@ export const MainView = () => {
                             {!user ? (
                                 <Navigate to='/login' replace />
                             ) : movies.length === 0 ? (
-                                <Col> The list is empty!</Col>
+                                <div>
+                                    <NavBar
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                        searchMovies={searchMovies}
+                                    />
+                                    <Col> The list is empty!</Col>
+                                </div>
                             ) : (
                                 <>
                                     <NavBar
                                         setUser={setUser}
                                         setToken={setToken}
                                         user={user}
+                                        searchMovies={searchMovies}
                                     />
                                     <MovieView
                                         movieData={movies}
@@ -93,7 +119,6 @@ export const MainView = () => {
                                         user={user}
                                         token={token}
                                     />
-                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -106,21 +131,27 @@ export const MainView = () => {
                             {!user ? (
                                 <Navigate to={'/login'} replace />
                             ) : movies.length === 0 ? (
-                                <Col> The list is empty!</Col>
+                                <>
+                                    <NavBar
+                                        setUser={setUser}
+                                        setToken={setToken}
+                                        user={user}
+                                        searchMovies={searchMovies}
+                                    />
+                                    <Col> The list is empty!</Col>
+                                </>
                             ) : (
                                 <>
                                     <NavBar
                                         setUser={setUser}
                                         setToken={setToken}
                                         user={user}
+                                        searchMovies={searchMovies}
                                     />
-                                    <Row className='my-2'>
+                                    <Row>
                                         {movies.map((movie) => {
                                             return (
-                                                <Col
-                                                    className='my-3 mx-2'
-                                                    key={movie._id}
-                                                >
+                                                <Col key={movie._id}>
                                                     <MovieCard
                                                         movieData={movie}
                                                         user={user}
@@ -131,7 +162,6 @@ export const MainView = () => {
                                             );
                                         })}
                                     </Row>
-                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -156,7 +186,6 @@ export const MainView = () => {
                                         token={token}
                                         movieData={movies}
                                     />
-                                    <FooterView />
                                 </>
                             )}
                         </>

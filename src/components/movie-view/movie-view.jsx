@@ -78,7 +78,6 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
                     </Col>
                 </Row>
             )}
-            <Row></Row>
         </>
     );
 };

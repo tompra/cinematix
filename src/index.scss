@@ -5,14 +5,12 @@ $color-primary: #96cdff;
     height: 75%;
 }
 .navbar--logo {
-    width: 4rem;
+    width: 6rem;
+    object-fit: contain;
 }
 .user__form--container {
+    width: 100%;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .user__update--container {
     min-height: 100vh;
@@ -23,6 +21,10 @@ $color-primary: #96cdff;
 .footer--container {
     background-color: $color-primary;
     min-height: 10rem;
+}
+.card--container {
+    width: 18rem;
+    height: 40rem;
 }
 .card--img:hover {
     opacity: 0.8;
@@ -48,4 +50,17 @@ $color-primary: #96cdff;
     border-radius: 5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.gradient-custom {
+    background: $color-primary;
+    background: linear-gradient(
+        to right,
+        rgba(150, 205, 255, 1),
+        rgb(9, 120, 171)
+    );
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

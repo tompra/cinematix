@@ -73,15 +73,15 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
     };
     return (
         <>
-            <Card style={{ width: '18rem', minHeight: '36rem' }}>
+            <Card className='card--container' border='dark'>
                 <Card.Img
                     variant='top'
                     src={movieData.imageUrl}
                     className='card--img'
                 />
-                <Card.Body style={{ backgroundColor: '#96cdff' }}>
-                    <Card.Title className='mb-3'>{movieData.title}</Card.Title>
-                    <Card.Subtitle className='mb-3'>
+                <Card.Body className='bg-dark text-white h-100'>
+                    <Card.Title>{movieData.title}</Card.Title>
+                    <Card.Subtitle>
                         Directed by: {movieData.director.name}
                     </Card.Subtitle>
                     <div className='d-flex justify-content-around align-items-center'>

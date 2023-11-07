@@ -3,7 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { MainView } from './components/main-view/main-view';
 
 const App = () => {
-    return <MainView />;
+    return (
+        <div className='gradient-custom'>
+            <MainView />
+        </div>
+    );
 };
 
 const container = document.querySelector('#root');
