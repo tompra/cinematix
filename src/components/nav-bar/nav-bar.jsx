@@ -71,6 +71,9 @@ export const NavBar = ({ setUser, setToken, user, searchMovies }) => {
                             </Navbar.Text>
                         </Nav>
                         <Form className='d-flex'>
+                            <Form.Label htmlFor='searchInput'>
+                                Search
+                            </Form.Label>
                             <Form.Control
                                 type='search'
                                 placeholder='Search movies...'
@@ -78,6 +81,8 @@ export const NavBar = ({ setUser, setToken, user, searchMovies }) => {
                                 aria-label='Search'
                                 value={searchInput}
                                 onChange={handleInput}
+                                id='searchInput'
+                                name='searchInput'
                             />
                         </Form>
                     </Navbar.Collapse>

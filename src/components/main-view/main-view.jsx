@@ -111,7 +111,6 @@ export const MainView = () => {
                                         searchMovies={searchMovies}
                                     />
                                     <SpinnerComp />
-                                    <FooterView />
                                 </div>
                             ) : (
                                 <>
@@ -127,7 +126,6 @@ export const MainView = () => {
                                         user={user}
                                         token={token}
                                     />
-                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -148,7 +146,6 @@ export const MainView = () => {
                                         searchMovies={searchMovies}
                                     />
                                     <SpinnerComp />
-                                    <FooterView />
                                 </>
                             ) : (
                                 <>
@@ -178,7 +175,6 @@ export const MainView = () => {
                                             })}
                                         </Row>
                                     )}
-                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -203,7 +199,6 @@ export const MainView = () => {
                                         token={token}
                                         movieData={movies}
                                     />
-                                    <FooterView />
                                 </>
                             )}
                         </>
