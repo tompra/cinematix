@@ -1,16 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
-import { LoginView } from '../login-view/login-view';
-import { SignIn } from '../sign-in-view/sign-in-view';
-import { NavBar } from '../nav-bar/nav-bar';
-import { ProfileView } from '../profile-view/profile-view';
-import { FooterView } from '../footer-view/footer-view';
-import { SpinnerComp } from '../spinner/spinner';
 import { LoginRoute } from '../login-route/login-route';
 import { SignInRoute } from '../signin-route/signin-route';
+import { MovieRoute } from '../movie-route/movie-route';
+import { HomeRoute } from '../home-route/home-route';
+import { ProfileRoute } from '../profile-route/profile-route';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -65,7 +59,6 @@ export const MainView = () => {
             setMovies(filterMovies);
         }
     };
-
     return (
         <BrowserRouter>
             <Routes>
@@ -84,109 +77,42 @@ export const MainView = () => {
                 <Route
                     path='/movies/:movieId'
                     element={
-                        <>
-                            {!user ? (
-                                <Navigate to='/login' replace />
-                            ) : loading ? (
-                                <div>
-                                    <NavBar
-                                        setUser={setUser}
-                                        setToken={setToken}
-                                        user={user}
-                                        searchMovies={searchMovies}
-                                    />
-                                    <SpinnerComp />
-                                </div>
-                            ) : (
-                                <>
-                                    <NavBar
-                                        setUser={setUser}
-                                        setToken={setToken}
-                                        user={user}
-                                        searchMovies={searchMovies}
-                                    />
-                                    <MovieView
-                                        movieData={movies}
-                                        similarMovies={similarMovies}
-                                        user={user}
-                                        token={token}
-                                    />
-                                </>
-                            )}
-                        </>
+                        <MovieRoute
+                            user={user}
+                            loading={loading}
+                            setUser={setUser}
+                            setToken={setToken}
+                            movies={movies}
+                            similarMovies={similarMovies}
+                            token={token}
+                            searchMovies={searchMovies}
+                        />
                     }
                 />
                 <Route
                     path='/'
                     element={
-                        <>
-                            {!user ? (
-                                <Navigate to={'/login'} replace />
-                            ) : loading ? (
-                                <>
-                                    <NavBar
-                                        setUser={setUser}
-                                        setToken={setToken}
-                                        user={user}
-                                        searchMovies={searchMovies}
-                                    />
-                                    <SpinnerComp />
-                                </>
-                            ) : (
-                                <>
-                                    <NavBar
-                                        setUser={setUser}
-                                        setToken={setToken}
-                                        user={user}
-                                        searchMovies={searchMovies}
-                                    />
-                                    {movies.length === 0 ? (
-                                        <Col className='text-center'>
-                                            <h1>There is no movie</h1>
-                                        </Col>
-                                    ) : (
-                                        <Row className='w-100'>
-                                            {movies.map((movie) => {
-                                                return (
-                                                    <Col key={movie._id}>
-                                                        <MovieCard
-                                                            movieData={movie}
-                                                            user={user}
-                                                            token={token}
-                                                            setUser={setUser}
-                                                        />
-                                                    </Col>
-                                                );
-                                            })}
-                                        </Row>
-                                    )}
-                                </>
-                            )}
-                        </>
+                        <HomeRoute
+                            user={user}
+                            setUser={setUser}
+                            setToken={setToken}
+                            movies={movies}
+                            searchMovies={searchMovies}
+                            loading={loading}
+                            token={token}
+                        />
                     }
                 />
                 <Route
                     path='/users'
                     element={
-                        <>
-                            {!user ? (
-                                <Navigate to={'/login'} replace />
-                            ) : (
-                                <>
-                                    <NavBar
-                                        setUser={setUser}
-                                        setToken={setToken}
-                                        user={user}
-                                    />
-                                    <ProfileView
-                                        setUser={setUser}
-                                        user={user}
-                                        token={token}
-                                        movieData={movies}
-                                    />
-                                </>
-                            )}
-                        </>
+                        <ProfileRoute
+                            user={user}
+                            setUser={setUser}
+                            setToken={setToken}
+                            movies={movies}
+                            token={token}
+                        />
                     }
                 />
             </Routes>

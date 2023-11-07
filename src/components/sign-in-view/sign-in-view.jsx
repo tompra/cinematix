@@ -58,6 +58,7 @@ export const SignIn = ({ user }) => {
             })
             .then((errorDetails) => {
                 console.error('errorDetails', errorDetails);
+                showMessage(errorDetails);
             })
             .catch((error) => {
                 console.error(error);
