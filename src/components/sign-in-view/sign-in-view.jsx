@@ -8,11 +8,11 @@ import {
     Col,
     Card,
 } from 'react-bootstrap';
-import logo from '../../images/cinematix logo.svg';
+import logo from '../../assets/cinematix logo.svg';
 import { Link } from 'react-router-dom';
 import { MessageModal } from '../message-modal/message-modal';
 
-export const SignIn = ({ user }) => {
+export const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');

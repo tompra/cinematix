@@ -2,6 +2,8 @@ import { NavBar } from '../nav-bar/nav-bar';
 import { MovieCard } from '../movie-card/movie-card';
 import { SpinnerComp } from '../spinner/spinner';
 import { Col, Row } from 'react-bootstrap';
+import { Navigate } from 'react-router';
+import Proptypes from 'prop-types';
 
 export function HomeRoute({
     user,
@@ -13,7 +15,7 @@ export function HomeRoute({
     token,
 }) {
     if (!user) {
-        <Navigate to='/login' replace />;
+        return <Navigate to='/login' replace />;
     }
     return loading ? (
         <>
@@ -54,3 +56,12 @@ export function HomeRoute({
         </>
     );
 }
+HomeRoute.propTypes = {
+    user: Proptypes.object,
+    setUser: Proptypes.func,
+    setToken: Proptypes.func,
+    movies: Proptypes.array,
+    searchMovies: Proptypes.func,
+    loading: Proptypes.bool,
+    token: Proptypes.string,
+};

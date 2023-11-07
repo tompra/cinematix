@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import {
     Button,
@@ -10,7 +9,7 @@ import {
     Card,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import logo from '../../images/cinematix logo.svg';
+import logo from '../../assets/cinematix logo.svg';
 import { MessageModal } from '../message-modal/message-modal';
 
 export const LoginView = ({ onLoggedIn }) => {
@@ -137,7 +136,7 @@ export const LoginView = ({ onLoggedIn }) => {
                                 </div>
                                 <div>
                                     <p className='mb-0'>
-                                        Don't have an account?
+                                        Don&#39;t have an account?
                                         <Link to={'/signin'}>
                                             <Button
                                                 className='link-opacity-75-hover text-decoration-none'

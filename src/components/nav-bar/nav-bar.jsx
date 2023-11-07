@@ -1,7 +1,8 @@
 import { Navbar, Nav, Container, Image, Form } from 'react-bootstrap';
-import logo from '../../images/cinematix logo.svg';
+import logo from '../../assets/cinematix logo.svg';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const timeOfTheDay = (user) => {
     const date = new Date().getHours();
@@ -93,4 +94,10 @@ export const NavBar = ({ setUser, setToken, user, searchMovies }) => {
             </Navbar>
         </>
     );
+};
+NavBar.propTypes = {
+    setUser: PropTypes.func.isRequired,
+    setToken: PropTypes.func.isRequired,
+    user: PropTypes.object,
+    searchMovies: PropTypes.func.isRequired,
 };

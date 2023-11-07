@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LoginRoute } from '../login-route/login-route';
 import { SignInRoute } from '../signin-route/signin-route';
 import { MovieRoute } from '../movie-route/movie-route';

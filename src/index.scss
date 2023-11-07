@@ -1,7 +1,8 @@
-@import '~bootstrap/scss/bootstrap.scss';
+@import 'bootstrap/scss/bootstrap.scss';
 $color-primary: #96cdff;
 $box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
 .main-container {
     min-height: 100vh;
     width: 100%;
@@ -29,7 +30,6 @@ $box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
 }
 .card--container {
     width: 18rem;
-    height: 40rem;
     margin: 2rem 0 2rem 2rem;
 }
 .card--img:hover {
@@ -63,8 +63,9 @@ $box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
         rgb(9, 120, 171)
     );
 }
-.footer {
+.spinner {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    margin: 0 auto;
 }
