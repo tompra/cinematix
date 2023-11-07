@@ -99,9 +99,12 @@ export const LoginView = ({ onLoggedIn }) => {
                                                     setUsername(e.target.value)
                                                 }
                                                 minLength={5}
+                                                id='email'
+                                                name='email'
+                                                autoComplete='none'
                                                 required
                                             />
-                                            <Form.Label htmlFor='typeEmailX'>
+                                            <Form.Label htmlFor='email'>
                                                 Email
                                             </Form.Label>
                                         </Form.Group>
@@ -113,9 +116,11 @@ export const LoginView = ({ onLoggedIn }) => {
                                                     setPassword(e.target.value)
                                                 }
                                                 minLength={8}
+                                                id='password'
+                                                name='password'
                                                 required
                                             />
-                                            <Form.Label htmlFor='typePasswordX'>
+                                            <Form.Label htmlFor='password'>
                                                 Password
                                             </Form.Label>
                                         </Form.Group>

@@ -9,6 +9,7 @@ import { NavBar } from '../nav-bar/nav-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { FooterView } from '../footer-view/footer-view';
 import { SpinnerComp } from '../spinner/spinner';
+import { LoginRoute } from '../login-route/login-route';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -70,18 +71,12 @@ export const MainView = () => {
                 <Route
                     path='/login'
                     element={
-                        user ? (
-                            <Navigate to='/' />
-                        ) : (
-                            <div>
-                                <LoginView
-                                    onLoggedIn={(user, token) => {
-                                        setUser(user);
-                                        setToken(token);
-                                    }}
-                                />
-                            </div>
-                        )
+                        <LoginRoute
+                            user={user}
+                            setUser={setUser}
+                            token={token}
+                            setToken={setToken}
+                        />
                     }
                 />
                 <Route

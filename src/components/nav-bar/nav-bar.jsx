@@ -71,7 +71,10 @@ export const NavBar = ({ setUser, setToken, user, searchMovies }) => {
                             </Navbar.Text>
                         </Nav>
                         <Form className='d-flex'>
-                            <Form.Label htmlFor='searchInput'>
+                            <Form.Label
+                                htmlFor='searchInput'
+                                className='d-none'
+                            >
                                 Search
                             </Form.Label>
                             <Form.Control
