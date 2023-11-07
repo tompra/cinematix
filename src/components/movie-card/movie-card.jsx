@@ -1,12 +1,11 @@
-import Proptypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Heart from 'react-animated-heart';
+import PropTypes from 'prop-types';
 
 export const MovieCard = ({ movieData, user, setUser, token }) => {
     const [favoriteMovie, setFavoriteMovie] = useState(false);
-    console.log('user', user);
     useEffect(() => {
         if (
             user.favoriteMovies &&
@@ -37,7 +36,6 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                 }
             })
             .then((user) => {
-                console.log('add favorite', user);
                 setFavoriteMovie(true);
                 setUser(user);
                 localStorage.setItem('user', JSON.stringify(user));
@@ -60,7 +58,6 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                     alert('Failed to remove favorite movie');
                     throw new Error('Failed to remove favorite movie');
                 } else {
-                    alert('Movie deleted succesfully');
                     return response.json();
                 }
             })
@@ -74,15 +71,19 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
     };
     return (
         <>
-            <Card style={{ width: '18rem', minHeight: '36rem' }}>
+            <Card
+                className='card--container'
+                border='dark'
+                style={{ height: '40rem' }}
+            >
                 <Card.Img
                     variant='top'
                     src={movieData.imageUrl}
                     className='card--img'
                 />
-                <Card.Body>
-                    <Card.Title className='mb-3'>{movieData.title}</Card.Title>
-                    <Card.Subtitle className='mb-3'>
+                <Card.Body className='bg-dark text-white'>
+                    <Card.Title>{movieData.title}</Card.Title>
+                    <Card.Subtitle>
                         Directed by: {movieData.director.name}
                     </Card.Subtitle>
                     <div className='d-flex justify-content-around align-items-center'>
@@ -110,20 +111,27 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
 };
 
 MovieCard.propTypes = {
-    movieData: Proptypes.shape({
-        title: Proptypes.string.isRequired,
-        description: Proptypes.string.isRequired,
-        imageUrl: Proptypes.string.isRequired,
-        director: Proptypes.shape({
-            name: Proptypes.string.isRequired,
-            bio: Proptypes.string.isRequired,
-            birthyear: Proptypes.string,
-            deathyear: Proptypes.string,
+    movieData: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string.isRequired,
+        director: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            bio: PropTypes.string.isRequired,
+            birthyear: PropTypes.string,
+            deathyear: PropTypes.string,
         }),
-        genre: Proptypes.shape({
-            name: Proptypes.string.isRequired,
-            description: Proptypes.string,
+        genre: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string,
         }),
-        actors: Proptypes.arrayOf(Proptypes.string),
+        actors: PropTypes.arrayOf(PropTypes.string),
     }).isRequired,
+    user: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        favoriteMovies: PropTypes.arrayOf(PropTypes.string),
+    }),
+    setUser: PropTypes.func.isRequired,
+    token: PropTypes.string.isRequired,
 };

@@ -1,13 +1,33 @@
 import { useState } from 'react';
-import { Button, Form, Image, Container, Row, Col } from 'react-bootstrap';
-import logo from '../../images/cinematix-logo.svg';
+import {
+    Button,
+    Form,
+    Image,
+    Container,
+    Row,
+    Col,
+    Card,
+} from 'react-bootstrap';
+import logo from '../../assets/cinematix logo.svg';
 import { Link } from 'react-router-dom';
+import { MessageModal } from '../message-modal/message-modal';
 
 export const SignIn = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [birthday, setBirthday] = useState('');
+    const [messageModal, setMessageModal] = useState(false);
+    const [message, setMessage] = useState('');
+
+    const showMessage = (message) => {
+        setMessage(message);
+        setMessageModal(true);
+    };
+
+    const closeMessage = () => {
+        setMessageModal(false);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,101 +47,145 @@ export const SignIn = () => {
         })
             .then((response) => {
                 if (!response.ok) {
-                    console.error(
-                        `Signup failed with status: ${response.status}`
-                    );
-                    return response.text().then((text) => {
-                        console.error(`Error response: ${text}`);
-                        throw Error(`There was an error signing up the user`);
-                    });
+                    showMessage('Something went wrong!');
+                    // throw new Error(`HTTP error! Status: ${response.status}`);
+                    console.error('http error! Status ' + response.status);
+                    return response.text();
                 } else {
-                    alert('Signup successful');
+                    showMessage("You're signed in!");
                     window.location.replace('/login');
                 }
             })
+            .then((errorDetails) => {
+                console.error('errorDetails', errorDetails);
+                showMessage(errorDetails);
+            })
             .catch((error) => {
                 console.error(error);
-                alert('Signup failed');
+                showMessage('Something went wrong!');
             });
     };
     return (
         <>
             <Container
-                style={{ minHeight: '100vh' }}
-                className='d-flex justify-content-center align-items-center'
+                fluid
+                className='py-3 h-100 gradient-custom user__form--container'
             >
-                <Row>
-                    <Col xs={12} md={6}>
-                        <Image
-                            src={logo}
-                            alt='Cinematix logo'
-                            className='img-fluid'
-                        />
-                    </Col>
-                    <Col xs={12} md={6} className='form--container'>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId='formUsername'>
-                                <Form.Label>Username</Form.Label>
-                                <Form.Control
-                                    type='text'
-                                    value={username}
-                                    onChange={(e) =>
-                                        setUsername(e.target.value)
-                                    }
-                                    minLength={5}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group controlId='formPassword'>
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type='password'
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    minLength={8}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    type='email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Birthday</Form.Label>
-                                <Form.Control
-                                    type='date'
-                                    value={birthday}
-                                    onChange={(e) =>
-                                        setBirthday(e.target.value)
-                                    }
-                                    required
-                                />
-                            </Form.Group>
-                            <Form.Group className='my-3 d-flex justify-content-center'>
-                                <Button type='submit' variant='primary'>
-                                    Signup
-                                </Button>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                    <Col className='text-center'>
-                        <Link to={'/login'}>
-                            <Button
-                                className='link-opacity-75-hover'
-                                variant='link'
-                            >
-                                I have an account already
-                            </Button>
-                        </Link>
+                <Row className='d-flex justify-content-center align-items-center h-100 '>
+                    <Col sm={12} md={8} lg={6} xl={5}>
+                        <Card
+                            className='bg-dark text-white'
+                            style={{ borderRadius: '1rem' }}
+                        >
+                            <Card.Body className='p-5 text-center'>
+                                <div className='mb-md-4 mt-md-3 pb-3'>
+                                    <h2 className='fw-bold mb-2 text-uppercase'>
+                                        Welcome to
+                                    </h2>
+                                    <Image
+                                        src={logo}
+                                        alt='Cinematix logo'
+                                        className='img-fluid'
+                                    />
+                                    <p className='text-white-50 mb-5'>
+                                        Please enter your login and password!
+                                    </p>
+                                    <Form onSubmit={handleSubmit}>
+                                        <Form.Group
+                                            controlId='formUsername'
+                                            className='my-2'
+                                        >
+                                            <Form.Label>Username</Form.Label>
+                                            <Form.Control
+                                                type='text'
+                                                value={username}
+                                                onChange={(e) =>
+                                                    setUsername(e.target.value)
+                                                }
+                                                minLength={5}
+                                                autoComplete='none'
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group
+                                            controlId='formPassword'
+                                            className='my-2'
+                                        >
+                                            <Form.Label>Password</Form.Label>
+                                            <Form.Control
+                                                type='password'
+                                                value={password}
+                                                onChange={(e) =>
+                                                    setPassword(e.target.value)
+                                                }
+                                                minLength={8}
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group
+                                            controlId='formEmail'
+                                            className='my-2'
+                                        >
+                                            <Form.Label>Email</Form.Label>
+                                            <Form.Control
+                                                type='email'
+                                                value={email}
+                                                onChange={(e) =>
+                                                    setEmail(e.target.value)
+                                                }
+                                                autoComplete='none'
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group
+                                            controlId='formBirthday'
+                                            className='my-2'
+                                        >
+                                            <Form.Label>Birthday</Form.Label>
+                                            <Form.Control
+                                                type='date'
+                                                value={birthday}
+                                                onChange={(e) =>
+                                                    setBirthday(e.target.value)
+                                                }
+                                                className='text-center'
+                                                required
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className='d-flex justify-content-center my-3'>
+                                            <Button
+                                                variant='primary'
+                                                size='lg'
+                                                className='px-5'
+                                                type='submit'
+                                            >
+                                                Login
+                                            </Button>
+                                        </Form.Group>
+                                    </Form>
+                                </div>
+                                <div>
+                                    <p className='mb-0'>
+                                        You have an account?
+                                        <Link to={'/login'}>
+                                            <Button
+                                                className='link-opacity-75-hover text-decoration-none'
+                                                variant='link'
+                                            >
+                                                Login
+                                            </Button>
+                                        </Link>
+                                    </p>
+                                </div>
+                            </Card.Body>
+                        </Card>
                     </Col>
                 </Row>
+                <MessageModal
+                    show={messageModal}
+                    message={message}
+                    onHide={closeMessage}
+                />
             </Container>
         </>
     );

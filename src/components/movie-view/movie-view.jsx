@@ -9,15 +9,14 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
     const movie = movieData.find((mov) => mov._id === movieId);
     const setSimilarMovies = similarMovies(movie);
 
-    console.log(setSimilarMovies);
     return (
         <>
-            <Row className='mx-2 my-3'>
+            <Row className='mx-2 my-3 bg-dark text-white movie--view__container'>
                 <Col xs={12} md={3} lg={3}>
                     <Image
                         src={movie.imageUrl}
                         alt='Movie Poster'
-                        className='img-fluid'
+                        className='img-fluid border border-secondary-subtle'
                     />
                 </Col>
                 <Col xs={12} md={9} lg={9}>
@@ -56,7 +55,7 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
                             <span>{movie.actors.join('∙ ')}</span>
                         </Col>
                     </Row>
-                    <Row className='my-2'>
+                    <Row className='my-4'>
                         <Link to={'/'}>
                             <Col className='d-flex justify-content-center'>
                                 <Button>Back</Button>
@@ -65,20 +64,26 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
                     </Row>
                 </Col>
             </Row>
-            {setSimilarMovies.length > 0 && (
-                <Row className='d-flex justify-content-center mx-2 my-3'>
-                    <Col>
-                        <h2>Similar movies</h2>
-                        {setSimilarMovies.map((movie) => (
-                            <MovieCard
-                                key={movie._id}
-                                movieData={movie}
-                                user={user}
-                            />
-                        ))}
-                    </Col>
-                </Row>
-            )}
+            <Row className='w-100 my-2 mt-4'>
+                <h2 className='ml-2'>Similar movies</h2>
+                {setSimilarMovies.length > 0 ? (
+                    <>
+                        <Col>
+                            {setSimilarMovies.map((movie) => (
+                                <MovieCard
+                                    key={movie._id}
+                                    movieData={movie}
+                                    user={user}
+                                />
+                            ))}
+                        </Col>
+                    </>
+                ) : (
+                    <h1 className='mx-2'>
+                        There are no similar movies for this movie
+                    </h1>
+                )}
+            </Row>
         </>
     );
 };
