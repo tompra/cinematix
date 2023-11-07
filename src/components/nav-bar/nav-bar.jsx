@@ -25,7 +25,7 @@ export const NavBar = ({ setUser, setToken, user, searchMovies }) => {
         <>
             <Navbar
                 expand='lg'
-                className='navbar--container'
+                className='navbar--container w-100'
                 bg='dark'
                 data-bs-theme='dark'
             >

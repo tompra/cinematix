@@ -8,7 +8,7 @@ import { SignIn } from '../sign-in-view/sign-in-view';
 import { NavBar } from '../nav-bar/nav-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { FooterView } from '../footer-view/footer-view';
-import { Spinner } from '../spinner/spinner';
+import { SpinnerComp } from '../spinner/spinner';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -110,7 +110,7 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Spinner />
+                                    <SpinnerComp />
                                     <FooterView />
                                 </div>
                             ) : (
@@ -147,7 +147,7 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Spinner />
+                                    <SpinnerComp />
                                     <FooterView />
                                 </>
                             ) : (
