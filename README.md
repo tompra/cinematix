@@ -16,7 +16,9 @@ By the end of the project, I’ll have a complete web app (client-side and serve
 4. Install dependencies `npm install`
 5. Run the project: `npm run dev`
 
-## Dependencies
+## Technologies
+
+### Dependencies
 
 -   React
 -   React-router
@@ -27,7 +29,7 @@ By the end of the project, I’ll have a complete web app (client-side and serve
 -   React-animated-heart
 -   React-icons
 
-## Dev-Dependencies
+### Dev-Dependencies
 
 -   Vite
 -   Process
@@ -63,3 +65,7 @@ I was reponsible for creating a React web app that interacts with a the movie AP
 2. Gained experience in user authorization and authentication.
 3. Realized the importance of efficient API calls and loading indicators for a smoother user experience.
 4. Understanding the potential for future improvements to make the app better.
+
+## Link to the project
+
+https://cinematix.netlify.app/
