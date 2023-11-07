@@ -98,13 +98,13 @@ export const LoginView = ({ onLoggedIn }) => {
                                                     setUsername(e.target.value)
                                                 }
                                                 minLength={5}
-                                                id='email'
-                                                name='email'
+                                                id='username'
+                                                name='username'
                                                 autoComplete='none'
                                                 required
                                             />
-                                            <Form.Label htmlFor='email'>
-                                                Email
+                                            <Form.Label htmlFor='username'>
+                                                Username
                                             </Form.Label>
                                         </Form.Group>
                                         <Form.Group className='form-outline form-white mb-4'>
