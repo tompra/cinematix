@@ -4,7 +4,7 @@ import { MainView } from './components/main-view/main-view';
 
 const App = () => {
     return (
-        <div className='gradient-custom'>
+        <div className='gradient-custom main-container'>
             <MainView />
         </div>
     );

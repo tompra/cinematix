@@ -36,7 +36,6 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                 }
             })
             .then((user) => {
-                console.log('add favorite', user);
                 setFavoriteMovie(true);
                 setUser(user);
                 localStorage.setItem('user', JSON.stringify(user));
@@ -59,7 +58,6 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                     alert('Failed to remove favorite movie');
                     throw new Error('Failed to remove favorite movie');
                 } else {
-                    alert('Movie deleted succesfully');
                     return response.json();
                 }
             })

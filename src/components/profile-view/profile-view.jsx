@@ -89,9 +89,15 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
     };
     return (
         <>
-            <Container className='user__update--container'>
-                <h1>Update information</h1>
-                <Row xs={12} md={6} className='update--container'>
+            <Container className='d-flex flex-column align-items-center justify-content-center'>
+                <Row
+                    xs={12}
+                    md={6}
+                    className='d-flex flex-column align-items-center mt-4 bg-dark text-white w-50 rounded-3 p-4'
+                >
+                    <Col className='w-100 text-center'>
+                        <h1>Update information</h1>
+                    </Col>
                     <Col xs={12} style={{ width: '30rem' }}>
                         <Form onSubmit={handleUpdate}>
                             <Form.Group controlId='formUsername'>
@@ -159,12 +165,12 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
                         </Form>
                     </Col>
                 </Row>
-                <Row className='my-3'>
-                    <h1 className='text-center my-4'>Favorite Movies</h1>
+                <Row className='mt-4'>
+                    <h1 className='text-center'>Favorite Movies</h1>
                     {favMovies.length === 0 ? (
-                        <h3 className='text-center'>
+                        <h2 className='text-center'>
                             No favorite movies added yet.
-                        </h3>
+                        </h2>
                     ) : (
                         favMovies.map((movie) => (
                             <Col

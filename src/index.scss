@@ -1,5 +1,16 @@
 @import '~bootstrap/scss/bootstrap.scss';
 $color-primary: #96cdff;
+$box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+.main-container {
+    min-height: 100vh;
+    width: 100%;
+}
+.movie--view__container {
+    padding: 1rem;
+    border-radius: 2rem;
+    box-shadow: $box-shadow;
+}
 .movie-billboard {
     width: 75%;
     height: 75%;
@@ -12,12 +23,6 @@ $color-primary: #96cdff;
     width: 100%;
     min-height: 100vh;
 }
-.user__update--container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 .footer--container {
     background-color: $color-primary;
     min-height: 10rem;
@@ -25,6 +30,7 @@ $color-primary: #96cdff;
 .card--container {
     width: 18rem;
     height: 40rem;
+    margin: 2rem 0 2rem 2rem;
 }
 .card--img:hover {
     opacity: 0.8;
@@ -38,8 +44,7 @@ $color-primary: #96cdff;
 }
 .navbar--container {
     background: $color-primary;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: $box-shadow;
 }
 .user__box--container {
     width: 60%;
@@ -48,8 +53,7 @@ $color-primary: #96cdff;
     z-index: -1;
     position: absolute;
     border-radius: 5rem;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    box-shadow: $box-shadow;
 }
 .gradient-custom {
     background: $color-primary;

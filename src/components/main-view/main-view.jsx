@@ -104,6 +104,7 @@ export const MainView = () => {
                                         searchMovies={searchMovies}
                                     />
                                     <Col> The list is empty!</Col>
+                                    <FooterView />
                                 </div>
                             ) : (
                                 <>
@@ -119,6 +120,7 @@ export const MainView = () => {
                                         user={user}
                                         token={token}
                                     />
+                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -138,7 +140,10 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Col> The list is empty!</Col>
+                                    <Col>
+                                        <h1>The list is empty!</h1>
+                                    </Col>
+                                    <FooterView />
                                 </>
                             ) : (
                                 <>
@@ -148,7 +153,7 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Row>
+                                    <Row className='w-100'>
                                         {movies.map((movie) => {
                                             return (
                                                 <Col key={movie._id}>
@@ -162,6 +167,7 @@ export const MainView = () => {
                                             );
                                         })}
                                     </Row>
+                                    <FooterView />
                                 </>
                             )}
                         </>
@@ -186,6 +192,7 @@ export const MainView = () => {
                                         token={token}
                                         movieData={movies}
                                     />
+                                    <FooterView />
                                 </>
                             )}
                         </>
