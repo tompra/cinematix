@@ -8,6 +8,14 @@ Using React, build the client-side for an app called popcornHub based on its exi
 
 By the end of the project, I’ll have a complete web app (client-side and server-side) built using full-stack JavaScript technologies. This project will demonstrate your mastery of full-stack JavaScript development. The complete tech stack to master the MERN (MongoDB, Express, React, and Node.js) stack.
 
+## How to get the project running
+
+1. Create directory in your local computer `mk dir <name_your_directory>`
+2. Clone the GitHub repository using the command: `git clone <repository-url>`
+3. Navigate to the project directory: `cd <project-directory>`
+4. Install dependencies `npm install`
+5. Run the project: `npm run dev`
+
 ## Dependencies
 
 -   React
