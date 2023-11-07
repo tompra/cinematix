@@ -8,6 +8,7 @@ import { SignIn } from '../sign-in-view/sign-in-view';
 import { NavBar } from '../nav-bar/nav-bar';
 import { ProfileView } from '../profile-view/profile-view';
 import { FooterView } from '../footer-view/footer-view';
+import { Spinner } from '../spinner/spinner';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -18,9 +19,11 @@ export const MainView = () => {
     const [initialMovies, setInitialMovies] = useState([]);
     const [user, setUser] = useState(initUser);
     const [token, setToken] = useState(initToken);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!token) {
+            setLoading(false);
             return;
         }
 
@@ -31,8 +34,12 @@ export const MainView = () => {
             .then((data) => {
                 setMovies(data);
                 setInitialMovies(data);
+                setLoading(false);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                setLoading(false);
+            });
     }, [token]);
 
     const similarMovies = (selectedMovie) => {
@@ -95,7 +102,7 @@ export const MainView = () => {
                         <>
                             {!user ? (
                                 <Navigate to='/login' replace />
-                            ) : movies.length === 0 ? (
+                            ) : loading ? (
                                 <div>
                                     <NavBar
                                         setUser={setUser}
@@ -103,7 +110,7 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Col> The list is empty!</Col>
+                                    <Spinner />
                                     <FooterView />
                                 </div>
                             ) : (
@@ -132,7 +139,7 @@ export const MainView = () => {
                         <>
                             {!user ? (
                                 <Navigate to={'/login'} replace />
-                            ) : movies.length === 0 ? (
+                            ) : loading ? (
                                 <>
                                     <NavBar
                                         setUser={setUser}
@@ -140,9 +147,7 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Col>
-                                        <h1>The list is empty!</h1>
-                                    </Col>
+                                    <Spinner />
                                     <FooterView />
                                 </>
                             ) : (
@@ -153,20 +158,26 @@ export const MainView = () => {
                                         user={user}
                                         searchMovies={searchMovies}
                                     />
-                                    <Row className='w-100'>
-                                        {movies.map((movie) => {
-                                            return (
-                                                <Col key={movie._id}>
-                                                    <MovieCard
-                                                        movieData={movie}
-                                                        user={user}
-                                                        token={token}
-                                                        setUser={setUser}
-                                                    />
-                                                </Col>
-                                            );
-                                        })}
-                                    </Row>
+                                    {movies.length === 0 ? (
+                                        <Col className='text-center'>
+                                            <h1>There is no movie</h1>
+                                        </Col>
+                                    ) : (
+                                        <Row className='w-100'>
+                                            {movies.map((movie) => {
+                                                return (
+                                                    <Col key={movie._id}>
+                                                        <MovieCard
+                                                            movieData={movie}
+                                                            user={user}
+                                                            token={token}
+                                                            setUser={setUser}
+                                                        />
+                                                    </Col>
+                                                );
+                                            })}
+                                        </Row>
+                                    )}
                                     <FooterView />
                                 </>
                             )}
