@@ -10,6 +10,7 @@ import { ProfileView } from '../profile-view/profile-view';
 import { FooterView } from '../footer-view/footer-view';
 import { SpinnerComp } from '../spinner/spinner';
 import { LoginRoute } from '../login-route/login-route';
+import { SignInRoute } from '../signin-route/signin-route';
 
 export const MainView = () => {
     const storedUser = localStorage.getItem('user');
@@ -79,18 +80,7 @@ export const MainView = () => {
                         />
                     }
                 />
-                <Route
-                    path='/signin'
-                    element={
-                        user ? (
-                            <Navigate to='/' />
-                        ) : (
-                            <div>
-                                <SignIn />
-                            </div>
-                        )
-                    }
-                />
+                <Route path='/signin' element={<SignInRoute user={user} />} />
                 <Route
                     path='/movies/:movieId'
                     element={

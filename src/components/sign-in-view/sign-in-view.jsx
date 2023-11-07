@@ -12,7 +12,7 @@ import logo from '../../images/cinematix logo.svg';
 import { Link } from 'react-router-dom';
 import { MessageModal } from '../message-modal/message-modal';
 
-export const SignIn = () => {
+export const SignIn = ({ user }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -48,11 +48,16 @@ export const SignIn = () => {
             .then((response) => {
                 if (!response.ok) {
                     showMessage('Something went wrong!');
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    // throw new Error(`HTTP error! Status: ${response.status}`);
+                    console.error('http error! Status ' + response.status);
+                    return response.text();
                 } else {
                     showMessage("You're signed in!");
                     window.location.replace('/login');
                 }
+            })
+            .then((errorDetails) => {
+                console.error('errorDetails', errorDetails);
             })
             .catch((error) => {
                 console.error(error);
@@ -97,6 +102,7 @@ export const SignIn = () => {
                                                     setUsername(e.target.value)
                                                 }
                                                 minLength={5}
+                                                autoComplete='none'
                                                 required
                                             />
                                         </Form.Group>
@@ -126,6 +132,7 @@ export const SignIn = () => {
                                                 onChange={(e) =>
                                                     setEmail(e.target.value)
                                                 }
+                                                autoComplete='none'
                                                 required
                                             />
                                         </Form.Group>
