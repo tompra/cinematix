@@ -9,7 +9,7 @@ import {
     Card,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import logo from '../../../assets/cinematix logo.svg';
+import logo from '../../../assets/cinematix-logo.svg';
 import { MessageModal } from '../../shared/message-modal/message-modal';
 
 export const LoginView = ({ onLoggedIn }) => {

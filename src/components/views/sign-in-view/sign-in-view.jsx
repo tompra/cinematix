@@ -48,14 +48,15 @@ export const SignIn = () => {
             .then((response) => {
                 if (!response.ok) {
                     showMessage('Something went wrong!');
-                    // throw new Error(`HTTP error! Status: ${response.status}`);
                     console.error('http error! Status ' + response.status);
-                    return response.text();
+                    throw new Error(
+                        `HTTP error! Status: ${
+                            response.status
+                        } and ${response.text()}`
+                    );
                 } else {
                     showMessage("You're signed in!");
-                    // use Navigate to redirect to the login page
                     <Navigate to='/login' replace />;
-                    // window.location.replace('/login');
                 }
             })
             .then((errorDetails) => {
@@ -161,7 +162,7 @@ export const SignIn = () => {
                                                 className='px-5'
                                                 type='submit'
                                             >
-                                                Login
+                                                Sign in
                                             </Button>
                                         </Form.Group>
                                     </Form>

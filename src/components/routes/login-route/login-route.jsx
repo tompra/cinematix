@@ -1,17 +1,15 @@
 import { LoginView } from '../../views/login-view/login-view';
 import { Navigate } from 'react-router';
 
-export const LoginRoute = ({ user, setUser, setToken, token }) => {
-    return user ? (
-        <Navigate to='/' />
+export const LoginRoute = ({ user, token, setUser, setToken }) => {
+    return !user ? (
+        <LoginView
+            onLoggedIn={(user, token) => {
+                setUser(user);
+                setToken(token);
+            }}
+        />
     ) : (
-        <div>
-            <LoginView
-                onLoggedIn={(user, token) => {
-                    setUser(user);
-                    setToken(token);
-                }}
-            />
-        </div>
+        <Navigate to='/' />
     );
 };
