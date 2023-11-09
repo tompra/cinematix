@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Heart from 'react-animated-heart';
 import PropTypes from 'prop-types';
+import { ToastContainer, toast } from 'react-toastify';
 
 export const MovieCard = ({ movieData, user, setUser, token }) => {
     const [favoriteMovie, setFavoriteMovie] = useState(false);
@@ -15,7 +16,7 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
         } else {
             setFavoriteMovie(false);
         }
-    }, [user, movieData]);
+    }, [user]);
 
     const addFavoriteMovie = () => {
         fetch(
@@ -39,8 +40,30 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                 setFavoriteMovie(true);
                 setUser(user);
                 localStorage.setItem('user', JSON.stringify(user));
+                toast.success('Added to favorite movies', {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                toast.warning(`🔴 ${err}`, {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
+            });
     };
 
     const removeFavoriteMovie = () => {
@@ -65,8 +88,30 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                 setFavoriteMovie(false);
                 setUser(user);
                 localStorage.setItem('user', JSON.stringify(user));
+                toast.error('Removed from favorite movies', {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+                console.error(err);
+                toast.warning(`🔴 ${err}`, {
+                    position: 'top-center',
+                    autoClose: 1500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'light',
+                });
+            });
     };
     return (
         <>
@@ -96,7 +141,18 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
                                 }
                             }}
                         />
-
+                        <ToastContainer
+                            position='top-center'
+                            autoClose={1500}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme='light'
+                        />
                         <Link
                             to={`/movies/${encodeURIComponent(movieData._id)}`}
                         >

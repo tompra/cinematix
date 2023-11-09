@@ -1,5 +1,6 @@
 import { MainView } from './components/views/main-view/main-view';
 import './index.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (

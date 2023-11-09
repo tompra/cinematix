@@ -28,6 +28,7 @@ By the end of the project, I’ll have a complete web app (client-side and serve
 -   Bootstrap
 -   React-animated-heart
 -   React-icons
+-   React-toastify
 
 ### Dev-Dependencies
 
