@@ -1,4 +1,4 @@
-import { LoginView } from '../login-view/login-view';
+import { LoginView } from '../../views/login-view/login-view';
 import { Navigate } from 'react-router';
 
 export const LoginRoute = ({ user, setUser, setToken, token }) => {

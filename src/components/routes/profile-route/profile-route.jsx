@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
-import { NavBar } from '../nav-bar/nav-bar';
-import { ProfileView } from '../profile-view/profile-view';
+import { NavBar } from "../../shared/nav-bar/nav-bar";
+import { ProfileView } from '../../views/profile-view/profile-view';
 
 export function ProfileRoute({
     user,

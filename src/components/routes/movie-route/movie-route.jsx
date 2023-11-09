@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { NavBar } from '../nav-bar/nav-bar';
-import { SpinnerComp } from '../spinner/spinner';
-import { MovieView } from '../movie-view/movie-view';
+import { SpinnerComp } from '../../shared/spinner/spinner';
+import { MovieView } from '../../views/movie-view/movie-view';
+import { NavBar } from '../../shared/nav-bar/nav-bar';
 
 export function MovieRoute({
     user,

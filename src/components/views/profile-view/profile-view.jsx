@@ -1,8 +1,8 @@
 import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MovieCard } from '../movie-card/movie-card';
-import { MessageModal } from '../message-modal/message-modal';
+import { MovieCard } from '../../shared/movie-card/movie-card';
+import { MessageModal } from '../../shared/message-modal/message-modal';
 
 export const ProfileView = ({ setUser, user, token, movieData }) => {
     const [username, setUsername] = useState(user.username);

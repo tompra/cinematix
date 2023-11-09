@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import { MovieCard } from '../movie-card/movie-card';
+import { MovieCard } from '../../shared/movie-card/movie-card';
 
 export const MovieView = ({ movieData, similarMovies, user }) => {
     const { movieId } = useParams();
