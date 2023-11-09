@@ -5,16 +5,14 @@ import { Col, Row } from "react-bootstrap";
 import { Navigate } from "react-router";
 import Proptypes from "prop-types";
 import AuthenticatedRoute from "../authenticated-route/authenticated-route";
+import { useAuthCtx } from "../../../context/auth-context";
+import { useMoviesCtx } from "../../../context/movies-context";
 
-export function HomeRoute({
-  user,
-  setUser,
-  setToken,
-  movies,
-  searchMovies,
-  loading,
-  token,
-}) {
+export function HomeRoute({ searchMovies }) {
+
+  const { user, setUser, setToken, loading, token } = useAuthCtx();
+  const { movies } = useMoviesCtx();
+
   return (
     <AuthenticatedRoute>
       {loading ? (
@@ -59,11 +57,5 @@ export function HomeRoute({
   );
 }
 HomeRoute.propTypes = {
-  user: Proptypes.object,
-  setUser: Proptypes.func,
-  setToken: Proptypes.func,
-  movies: Proptypes.array,
   searchMovies: Proptypes.func,
-  loading: Proptypes.bool,
-  token: Proptypes.string,
 };

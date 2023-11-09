@@ -69,3 +69,8 @@ I was reponsible for creating a React web app that interacts with a the movie AP
 ## Link to the project
 
 https://cinematix.netlify.app/
+
+## TODO
+
+1. Apply context to routes & all views (where necessary)
+2. Add filtered Movies (Search) to the movie Context

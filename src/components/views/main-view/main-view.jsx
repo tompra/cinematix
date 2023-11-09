@@ -5,17 +5,26 @@ import { SignInRoute } from "../../routes/signin-route/signin-route";
 import { MovieRoute } from "../../routes/movie-route/movie-route";
 import { HomeRoute } from "../../routes/home-route/home-route";
 import { ProfileRoute } from "../../routes/profile-route/profile-route";
+import { useAuthCtx } from "../../../context/auth-context";
+import { useMoviesCtx } from "../../../context/movies-context";
 
 export const MainView = () => {
-  const storedUser = localStorage.getItem("user");
-  const storedToken = localStorage.getItem("token");
-  const initUser = storedUser ? JSON.parse(storedUser) : null;
-  const initToken = storedToken ? storedToken : null;
-  const [movies, setMovies] = useState([]);
-  const [initialMovies, setInitialMovies] = useState([]);
-  const [user, setUser] = useState(initUser);
-  const [token, setToken] = useState(initToken);
-  const [loading, setLoading] = useState(true);
+
+  const {
+    movies,
+    setMovies,
+    initialMovies,
+    setInitialMovies,
+  } = useMoviesCtx();
+
+  const {
+    user,
+    setUser,
+    token,
+    setToken,
+    loading,
+    setLoading,
+  } = useAuthCtx();
 
   useEffect(() => {
     if (!token) {
@@ -36,7 +45,7 @@ export const MainView = () => {
         console.error(err);
         setLoading(false);
       });
-  }, [token]);
+  }, [token, setMovies, setInitialMovies, setLoading]);
 
   const similarMovies = (selectedMovie) => {
     return movies.filter((movie) => {
@@ -91,13 +100,7 @@ export const MainView = () => {
           path="/"
           element={
             <HomeRoute
-              user={user}
-              setUser={setUser}
-              setToken={setToken}
-              movies={movies}
               searchMovies={searchMovies}
-              loading={loading}
-              token={token}
             />
           }
         />
