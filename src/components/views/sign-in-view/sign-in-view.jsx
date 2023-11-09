@@ -8,7 +8,7 @@ import {
     Col,
     Card,
 } from 'react-bootstrap';
-import logo from '../../../assets/cinematix logo.svg';
+import logo from '../../../assets/cinematix-logo.svg';
 import { Link, Navigate } from 'react-router-dom';
 import { MessageModal } from '../../shared/message-modal/message-modal';
 
