@@ -127,7 +127,7 @@ export const LoginView = ({ onLoggedIn }) => {
                                         <Button
                                             variant='primary'
                                             size='lg'
-                                            className='px-5'
+                                            className='px-5 mt-4'
                                             type='submit'
                                         >
                                             Login
