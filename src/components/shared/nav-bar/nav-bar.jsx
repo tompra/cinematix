@@ -1,5 +1,5 @@
 import { Navbar, Nav, Container, Image, Form } from 'react-bootstrap';
-import logo from '../../assets/cinematix logo.svg';
+import logo from '../../../assets/cinematix logo.svg';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';

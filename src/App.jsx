@@ -1,4 +1,4 @@
-import { MainView } from './components/main-view/main-view';
+import { MainView } from './components/views/main-view/main-view';
 import './index.scss';
 
 function App() {

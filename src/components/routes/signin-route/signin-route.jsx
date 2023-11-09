@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignIn } from '../sign-in-view/sign-in-view';
+import { SignIn } from '../../views/sign-in-view/sign-in-view';
 import { Navigate } from 'react-router';
 
 export const SignInRoute = ({ user }) => {

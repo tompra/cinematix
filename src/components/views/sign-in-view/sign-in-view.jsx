@@ -8,9 +8,9 @@ import {
     Col,
     Card,
 } from 'react-bootstrap';
-import logo from '../../assets/cinematix logo.svg';
-import { Link } from 'react-router-dom';
-import { MessageModal } from '../message-modal/message-modal';
+import logo from '../../../assets/cinematix logo.svg';
+import { Link, Navigate } from 'react-router-dom';
+import { MessageModal } from '../../shared/message-modal/message-modal';
 
 export const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -53,7 +53,9 @@ export const SignIn = () => {
                     return response.text();
                 } else {
                     showMessage("You're signed in!");
-                    window.location.replace('/login');
+                    // use Navigate to redirect to the login page
+                    <Navigate to='/login' replace />;
+                    // window.location.replace('/login');
                 }
             })
             .then((errorDetails) => {
