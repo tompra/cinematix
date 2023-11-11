@@ -7,7 +7,7 @@ import { useAuthCtx } from '../../../context/auth-context';
 import { useMoviesCtx } from '../../../context/movies-context';
 
 export const ProfileView = () => {
-    const { user, setUser, token, setToken } = useAuthCtx();
+    const { user, setUser, token } = useAuthCtx();
     const { movies } = useMoviesCtx();
 
     const [username, setUsername] = useState(user.username);

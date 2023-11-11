@@ -11,7 +11,6 @@ import {
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/cinematix-logo.svg';
 import { MessageModal } from '../../shared/message-modal/message-modal';
-import '../../../index.scss';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');

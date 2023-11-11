@@ -2,7 +2,6 @@ import { Navbar, Nav, Container, Image, Form } from 'react-bootstrap';
 import logo from '../../../assets/cinematix-logo.svg';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useAuthCtx } from '../../../context/auth-context';
 import { useMoviesCtx } from '../../../context/movies-context';
 

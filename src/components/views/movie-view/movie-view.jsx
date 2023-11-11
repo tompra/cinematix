@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { MovieCard } from '../../shared/movie-card/movie-card';
 import { useMoviesCtx } from '../../../context/movies-context';
-import { useAuthCtx } from '../../../context/auth-context';
 
 export const MovieView = () => {
     const { movies, similarMovies } = useMoviesCtx();
