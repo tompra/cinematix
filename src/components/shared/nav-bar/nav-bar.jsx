@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useAuthCtx } from '../../../context/auth-context';
+import { useMoviesCtx } from '../../../context/movies-context';
 
-export const NavBar = ({ searchMovies }) => {
+export const NavBar = () => {
     const [searchInput, setSearchInput] = useState('');
     const { user, setUser, setToken } = useAuthCtx();
+    const { searchMovies } = useMoviesCtx();
 
     const handleInput = (e) => {
         const userInput = e.target.value;
@@ -99,10 +101,4 @@ export const NavBar = ({ searchMovies }) => {
             </Navbar>
         </>
     );
-};
-NavBar.propTypes = {
-    setUser: PropTypes.func.isRequired,
-    setToken: PropTypes.func.isRequired,
-    user: PropTypes.object,
-    searchMovies: PropTypes.func,
 };

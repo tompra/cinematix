@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieCard } from '../../shared/movie-card/movie-card';
 import { MessageModal } from '../../shared/message-modal/message-modal';
+import { useAuthCtx } from '../../../context/auth-context';
+import { useMoviesCtx } from '../../../context/movies-context';
 
-export const ProfileView = ({ setUser, user, token, movieData }) => {
+export const ProfileView = () => {
+    const { user, setUser, token, setToken } = useAuthCtx();
+    const { movies } = useMoviesCtx();
+
     const [username, setUsername] = useState(user.username);
     const [password, setPassword] = useState(user.password);
     const [email, setEmail] = useState(user.email);
@@ -14,7 +19,7 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
     const [showDelete, setShowDelete] = useState(false);
 
     const favMovies = user.favoriteMovies
-        ? movieData.filter((movie) => user.favoriteMovies.includes(movie._id))
+        ? movies.filter((movie) => user.favoriteMovies.includes(movie._id))
         : [];
 
     const showMessage = (message) => {
@@ -177,12 +182,7 @@ export const ProfileView = ({ setUser, user, token, movieData }) => {
                                 key={movie._id}
                                 className='d-flex justify-content-center '
                             >
-                                <MovieCard
-                                    movieData={movie}
-                                    token={token}
-                                    setUser={setUser}
-                                    user={user}
-                                />
+                                <MovieCard movieData={movie} />
                             </Col>
                         ))
                     )}

@@ -96,7 +96,7 @@ export const SignIn = () => {
                                     <Form onSubmit={handleSubmit}>
                                         <Form.Group
                                             controlId='formUsername'
-                                            className='my-2'
+                                            className='form-outline form-white mb-2'
                                         >
                                             <Form.Label>Username</Form.Label>
                                             <Form.Control
@@ -108,11 +108,12 @@ export const SignIn = () => {
                                                 minLength={5}
                                                 autoComplete='none'
                                                 required
+                                                className='initial--forms'
                                             />
                                         </Form.Group>
                                         <Form.Group
                                             controlId='formPassword'
-                                            className='my-2'
+                                            className='form-outline form-white mb-2'
                                         >
                                             <Form.Label>Password</Form.Label>
                                             <Form.Control
@@ -123,11 +124,12 @@ export const SignIn = () => {
                                                 }
                                                 minLength={8}
                                                 required
+                                                className='initial--forms'
                                             />
                                         </Form.Group>
                                         <Form.Group
                                             controlId='formEmail'
-                                            className='my-2'
+                                            className='form-outline form-white mb-2'
                                         >
                                             <Form.Label>Email</Form.Label>
                                             <Form.Control
@@ -138,11 +140,12 @@ export const SignIn = () => {
                                                 }
                                                 autoComplete='none'
                                                 required
+                                                className='initial--forms'
                                             />
                                         </Form.Group>
                                         <Form.Group
                                             controlId='formBirthday'
-                                            className='my-2'
+                                            className='form-outline form-white mb-2'
                                         >
                                             <Form.Label>Birthday</Form.Label>
                                             <Form.Control
@@ -151,11 +154,11 @@ export const SignIn = () => {
                                                 onChange={(e) =>
                                                     setBirthday(e.target.value)
                                                 }
-                                                className='text-center'
+                                                className='text-center initial--forms'
                                                 required
                                             />
                                         </Form.Group>
-                                        <Form.Group className='d-flex justify-content-center mt-3'>
+                                        <Form.Group className='d-flex justify-content-center mt-4'>
                                             <Button
                                                 variant='primary'
                                                 size='lg'

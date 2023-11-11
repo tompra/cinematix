@@ -7,30 +7,20 @@ import { AuthenticatedRoute } from '../authenticated-route/authenticated-route';
 import { useAuthCtx } from '../../../context/auth-context';
 import { useMoviesCtx } from '../../../context/movies-context';
 
-export function HomeRoute({ searchMovies }) {
-    const { user, setUser, setToken, loading, token } = useAuthCtx();
+export function HomeRoute() {
+    const { loading } = useAuthCtx();
     const { movies } = useMoviesCtx();
 
     return (
         <AuthenticatedRoute>
             {loading ? (
                 <>
-                    <NavBar
-                        setUser={setUser}
-                        setToken={setToken}
-                        user={user}
-                        searchMovies={searchMovies}
-                    />
+                    <NavBar />
                     <SpinnerComp />
                 </>
             ) : (
                 <>
-                    <NavBar
-                        setUser={setUser}
-                        setToken={setToken}
-                        user={user}
-                        searchMovies={searchMovies}
-                    />
+                    <NavBar />
                     {movies.length === 0 ? (
                         <Col className='text-center'>
                             <h1>There is no movie</h1>
@@ -39,12 +29,7 @@ export function HomeRoute({ searchMovies }) {
                         <Row className='w-100'>
                             {movies.map((movie) => (
                                 <Col key={movie._id}>
-                                    <MovieCard
-                                        movieData={movie}
-                                        user={user}
-                                        token={token}
-                                        setUser={setUser}
-                                    />
+                                    <MovieCard movieData={movie} />
                                 </Col>
                             ))}
                         </Row>

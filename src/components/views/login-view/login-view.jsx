@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/cinematix-logo.svg';
 import { MessageModal } from '../../shared/message-modal/message-modal';
+import '../../../index.scss';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
@@ -91,6 +92,9 @@ export const LoginView = ({ onLoggedIn }) => {
                                     </p>
                                     <Form onSubmit={handleSubmit}>
                                         <Form.Group className='form-outline form-white mb-4'>
+                                            <Form.Label htmlFor='username'>
+                                                Username
+                                            </Form.Label>
                                             <Form.Control
                                                 type='text'
                                                 value={username}
@@ -101,13 +105,14 @@ export const LoginView = ({ onLoggedIn }) => {
                                                 id='username'
                                                 name='username'
                                                 autoComplete='none'
+                                                className='initial--forms'
                                                 required
                                             />
-                                            <Form.Label htmlFor='username'>
-                                                Username
-                                            </Form.Label>
                                         </Form.Group>
                                         <Form.Group className='form-outline form-white mb-4'>
+                                            <Form.Label htmlFor='password'>
+                                                Password
+                                            </Form.Label>
                                             <Form.Control
                                                 type='password'
                                                 value={password}
@@ -118,12 +123,9 @@ export const LoginView = ({ onLoggedIn }) => {
                                                 id='password'
                                                 name='password'
                                                 required
+                                                className='initial--forms'
                                             />
-                                            <Form.Label htmlFor='password'>
-                                                Password
-                                            </Form.Label>
                                         </Form.Group>
-
                                         <Button
                                             variant='primary'
                                             size='lg'

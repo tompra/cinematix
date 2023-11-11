@@ -3,10 +3,13 @@ import { Button, Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { MovieCard } from '../../shared/movie-card/movie-card';
+import { useMoviesCtx } from '../../../context/movies-context';
+import { useAuthCtx } from '../../../context/auth-context';
 
-export const MovieView = ({ movieData, similarMovies, user }) => {
+export const MovieView = () => {
+    const { movies, similarMovies } = useMoviesCtx();
     const { movieId } = useParams();
-    const movie = movieData.find((mov) => mov._id === movieId);
+    const movie = movies.find((mov) => mov._id === movieId);
     const setSimilarMovies = similarMovies(movie);
 
     return (
@@ -65,16 +68,12 @@ export const MovieView = ({ movieData, similarMovies, user }) => {
                 </Col>
             </Row>
             <Row className='w-100 my-2 mt-4'>
-                <h2 className='ml-2'>Similar movies</h2>
+                <h2 className='ms-4'>Similar movies</h2>
                 {setSimilarMovies.length > 0 ? (
                     <>
                         <Col>
                             {setSimilarMovies.map((movie) => (
-                                <MovieCard
-                                    key={movie._id}
-                                    movieData={movie}
-                                    user={user}
-                                />
+                                <MovieCard key={movie._id} movieData={movie} />
                             ))}
                         </Col>
                     </>

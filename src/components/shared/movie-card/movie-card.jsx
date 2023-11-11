@@ -4,9 +4,12 @@ import { useState, useEffect } from 'react';
 import Heart from 'react-animated-heart';
 import PropTypes from 'prop-types';
 import { ToastContainer, toast } from 'react-toastify';
+import { useAuthCtx } from '../../../context/auth-context';
 
-export const MovieCard = ({ movieData, user, setUser, token }) => {
+export const MovieCard = ({ movieData }) => {
+    const { user, setUser, token } = useAuthCtx();
     const [favoriteMovie, setFavoriteMovie] = useState(false);
+
     useEffect(() => {
         if (
             user.favoriteMovies &&
@@ -165,28 +168,28 @@ export const MovieCard = ({ movieData, user, setUser, token }) => {
     );
 };
 
-MovieCard.propTypes = {
-    movieData: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        imageUrl: PropTypes.string.isRequired,
-        director: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            bio: PropTypes.string.isRequired,
-            birthyear: PropTypes.string,
-            deathyear: PropTypes.string,
-        }),
-        genre: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string,
-        }),
-        actors: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
-    user: PropTypes.shape({
-        username: PropTypes.string.isRequired,
-        favoriteMovies: PropTypes.arrayOf(PropTypes.string),
-    }),
-    setUser: PropTypes.func.isRequired,
-    token: PropTypes.string.isRequired,
-};
+// MovieCard.propTypes = {
+//     movieData: PropTypes.shape({
+//         _id: PropTypes.string.isRequired,
+//         title: PropTypes.string.isRequired,
+//         description: PropTypes.string.isRequired,
+//         imageUrl: PropTypes.string.isRequired,
+//         director: PropTypes.shape({
+//             name: PropTypes.string.isRequired,
+//             bio: PropTypes.string.isRequired,
+//             birthyear: PropTypes.string,
+//             deathyear: PropTypes.string,
+//         }),
+//         genre: PropTypes.shape({
+//             name: PropTypes.string.isRequired,
+//             description: PropTypes.string,
+//         }),
+//         actors: PropTypes.arrayOf(PropTypes.string),
+//     }).isRequired,
+//     user: PropTypes.shape({
+//         username: PropTypes.string.isRequired,
+//         favoriteMovies: PropTypes.arrayOf(PropTypes.string),
+//     }),
+//     setUser: PropTypes.func.isRequired,
+//     token: PropTypes.string.isRequired,
+// };
