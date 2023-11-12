@@ -71,7 +71,25 @@ I was reponsible for creating a React web app that interacts with a the movie AP
 
 https://cinematix.netlify.app/
 
-## TODO
+## Screenshots
+### Login 
+![login](https://github.com/tompra/cinematix/assets/143709419/ff86f534-3a74-4421-9aa3-94ea2b8a18a4)
 
-1. Apply context to routes & all views (where necessary)
-2. Add filtered Movies (Search) to the movie Context
+### Signin
+![signin](https://github.com/tompra/cinematix/assets/143709419/154f39f8-b368-4587-9ee0-a676098d73e0)
+
+### Home
+![home](https://github.com/tompra/cinematix/assets/143709419/60b6a7e9-bf9f-46d9-922a-512ff6524380)
+
+### MovieView
+![movie view](https://github.com/tompra/cinematix/assets/143709419/96e9ae48-a607-4050-9c30-30389c73100d)
+
+### Profile
+![profile](https://github.com/tompra/cinematix/assets/143709419/3a92fb64-7b51-4776-b0c7-fdac6d9ee147)
+
+
+
+
+
+
+
