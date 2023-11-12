@@ -1,10 +1,19 @@
-import { Container, Row, Col, Form, Button, Modal } from 'react-bootstrap';
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+    Modal,
+    InputGroup,
+} from 'react-bootstrap';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MovieCard } from '../../shared/movie-card/movie-card';
 import { MessageModal } from '../../shared/message-modal/message-modal';
 import { useAuthCtx } from '../../../context/auth-context';
 import { useMoviesCtx } from '../../../context/movies-context';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
 export const ProfileView = () => {
     const { user, setUser, token } = useAuthCtx();
@@ -17,6 +26,7 @@ export const ProfileView = () => {
     const [messageModal, setMessageModal] = useState(false);
     const [message, setMessage] = useState('');
     const [showDelete, setShowDelete] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const favMovies = user.favoriteMovies
         ? movies.filter((movie) => user.favoriteMovies.includes(movie._id))
@@ -105,7 +115,10 @@ export const ProfileView = () => {
                     </Col>
                     <Col xs={12} style={{ width: '30rem' }}>
                         <Form onSubmit={handleUpdate}>
-                            <Form.Group controlId='formUsername'>
+                            <Form.Group
+                                controlId='formUsername'
+                                className='form-outline form-white mb-4  d-flex flex-column align-items-center'
+                            >
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control
                                     type='text'
@@ -114,31 +127,53 @@ export const ProfileView = () => {
                                         setUsername(e.target.value)
                                     }
                                     minLength={5}
+                                    className='initial--forms'
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group controlId='formPassword'>
+                            <Form.Group
+                                controlId='formPassword'
+                                className='form-outline form-white mb-4 d-flex flex-column align-items-center'
+                            >
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type='password'
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    minLength={8}
-                                    required
-                                />
+                                <InputGroup className='initial--forms'>
+                                    <Form.Control
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
+                                        value={password}
+                                        onChange={(e) =>
+                                            setPassword(e.target.value)
+                                        }
+                                        minLength={8}
+                                        id='password'
+                                        name='password'
+                                        required
+                                    />
+                                    <Button
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
+                                    >
+                                        {showPassword ? (
+                                            <FaEyeSlash />
+                                        ) : (
+                                            <FaEye />
+                                        )}
+                                    </Button>
+                                </InputGroup>
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group className='form-outline form-white mb-4  d-flex flex-column align-items-center'>
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type='email'
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
+                                    className='initial--forms'
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group>
+                            <Form.Group className='form-outline form-white mb-4  d-flex flex-column align-items-center'>
                                 <Form.Label>Birthday</Form.Label>
                                 <Form.Control
                                     type='date'
@@ -146,10 +181,11 @@ export const ProfileView = () => {
                                     onChange={(e) =>
                                         setBirthday(e.target.value)
                                     }
+                                    className='initial--forms'
                                     required
                                 />
                             </Form.Group>
-                            <Form.Group className='my-3 d-flex justify-content-center'>
+                            <Form.Group className='my-4 d-flex justify-content-center'>
                                 <Button
                                     type='submit'
                                     variant='primary'
