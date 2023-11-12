@@ -10,7 +10,7 @@ import { useMoviesCtx } from '../../../context/movies-context';
 
 export const MainView = () => {
     const { setMovies, setInitialMovies } = useMoviesCtx();
-    const { token, setLoading } = useAuthCtx();
+    const { token, setLoading, user } = useAuthCtx();
 
     useEffect(() => {
         if (!token) {

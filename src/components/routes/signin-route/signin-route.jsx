@@ -5,5 +5,5 @@ import { useAuthCtx } from '../../../context/auth-context';
 
 export const SignInRoute = () => {
     const { user } = useAuthCtx();
-    return !user ? <SignIn user={user} /> : <Navigate to='/' />;
+    return !user ? <SignIn /> : <Navigate to='/' />;
 };

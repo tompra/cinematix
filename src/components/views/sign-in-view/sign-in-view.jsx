@@ -7,10 +7,12 @@ import {
     Row,
     Col,
     Card,
+    InputGroup,
 } from 'react-bootstrap';
 import logo from '../../../assets/cinematix-logo.svg';
 import { Link, Navigate } from 'react-router-dom';
 import { MessageModal } from '../../shared/message-modal/message-modal';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
 export const SignIn = () => {
     const [username, setUsername] = useState('');
@@ -19,6 +21,7 @@ export const SignIn = () => {
     const [birthday, setBirthday] = useState('');
     const [messageModal, setMessageModal] = useState(false);
     const [message, setMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const showMessage = (message) => {
         setMessage(message);
@@ -29,7 +32,7 @@ export const SignIn = () => {
         setMessageModal(false);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
             username: username,
@@ -38,35 +41,39 @@ export const SignIn = () => {
             birthday: birthday,
         };
 
-        fetch('https://popcornhub-api.onrender.com/users', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    showMessage('Something went wrong!');
-                    console.error('http error! Status ' + response.status);
-                    throw new Error(
-                        `HTTP error! Status: ${
-                            response.status
-                        } and ${response.text()}`
-                    );
-                } else {
-                    showMessage("You're signed in!");
-                    <Navigate to='/login' replace />;
+        try {
+            const response = await fetch(
+                'https://popcornhub-api.onrender.com/users',
+                {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 }
-            })
-            .then((errorDetails) => {
-                console.error('errorDetails', errorDetails);
-                showMessage(errorDetails);
-            })
-            .catch((error) => {
-                console.error(error);
-                showMessage('Something went wrong!');
-            });
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                if (response.status === 409) {
+                    showMessage('User already exists!');
+                } else {
+                    showMessage(`Error: ${errorText}`);
+                }
+                console.error(
+                    `HTTP error! Status: ${response.status}, Details: ${errorText}`
+                );
+                throw new Error(
+                    `HTTP error! Status: ${response.status}, Details: ${errorText}`
+                );
+            } else {
+                showMessage("You're signed in!");
+                <Navigate to={'/login'} replace />;
+            }
+        } catch (error) {
+            console.error(error);
+            showMessage('Something went wrong!');
+        }
     };
     return (
         <>
@@ -106,7 +113,7 @@ export const SignIn = () => {
                                                     setUsername(e.target.value)
                                                 }
                                                 minLength={5}
-                                                autoComplete='none'
+                                                autoComplete='off'
                                                 required
                                                 className='initial--forms'
                                             />
@@ -116,16 +123,38 @@ export const SignIn = () => {
                                             className='form-outline form-white mb-2'
                                         >
                                             <Form.Label>Password</Form.Label>
-                                            <Form.Control
-                                                type='password'
-                                                value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                                minLength={8}
-                                                required
-                                                className='initial--forms'
-                                            />
+                                            <InputGroup className='initial--forms'>
+                                                <Form.Control
+                                                    type={
+                                                        showPassword
+                                                            ? 'text'
+                                                            : 'password'
+                                                    }
+                                                    value={password}
+                                                    onChange={(e) =>
+                                                        setPassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    minLength={8}
+                                                    id='password'
+                                                    name='password'
+                                                    required
+                                                />
+                                                <Button
+                                                    onClick={() =>
+                                                        setShowPassword(
+                                                            !showPassword
+                                                        )
+                                                    }
+                                                >
+                                                    {showPassword ? (
+                                                        <FaEyeSlash />
+                                                    ) : (
+                                                        <FaEye />
+                                                    )}
+                                                </Button>
+                                            </InputGroup>
                                         </Form.Group>
                                         <Form.Group
                                             controlId='formEmail'
@@ -138,7 +167,7 @@ export const SignIn = () => {
                                                 onChange={(e) =>
                                                     setEmail(e.target.value)
                                                 }
-                                                autoComplete='none'
+                                                autoComplete='off'
                                                 required
                                                 className='initial--forms'
                                             />

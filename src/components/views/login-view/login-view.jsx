@@ -7,16 +7,19 @@ import {
     Row,
     Col,
     Card,
+    InputGroup,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/cinematix-logo.svg';
 import { MessageModal } from '../../shared/message-modal/message-modal';
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
 
 export const LoginView = ({ onLoggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [messageModal, setMessageModal] = useState(false);
     const [message, setMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     const showMessage = (message) => {
         setMessage(message);
@@ -27,42 +30,48 @@ export const LoginView = ({ onLoggedIn }) => {
         setMessageModal(false);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {
             username: username,
             password: password,
         };
-        fetch('https://popcornhub-api.onrender.com/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    showMessage('Username or Password incorrect!');
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                } else {
-                    showMessage('Login succesful!');
-                    return response.json();
+
+        try {
+            const response = await fetch(
+                'https://popcornhub-api.onrender.com/login',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
                 }
-            })
-            .then((response) => {
-                if (response.user) {
-                    localStorage.setItem('user', JSON.stringify(response.user));
-                    localStorage.setItem('token', response.token);
-                    showMessage('Login succesful!');
-                    onLoggedIn(response.user, response.token);
-                } else {
-                    showMessage('Something went wrong!');
-                }
-            })
-            .catch((err) => {
-                console.error(err);
+            );
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                showMessage(
+                    `HTTP error! Status: ${response.status} Details: ${errorText}`
+                );
+                throw new Error(errorText);
+            }
+
+            const responseData = await response.json();
+            showMessage('Login successful!');
+
+            if (responseData.user) {
+                localStorage.setItem('user', JSON.stringify(responseData.user));
+                localStorage.setItem('token', responseData.token);
+                onLoggedIn(responseData.user, responseData.token);
+            } else {
                 showMessage('Something went wrong!');
-            });
+                throw new Error('Unexpected response format');
+            }
+        } catch (err) {
+            console.error(err);
+            showMessage('Something went wrong!');
+        }
     };
     return (
         <>
@@ -103,7 +112,7 @@ export const LoginView = ({ onLoggedIn }) => {
                                                 minLength={5}
                                                 id='username'
                                                 name='username'
-                                                autoComplete='none'
+                                                autoComplete='off'
                                                 className='initial--forms'
                                                 required
                                             />
@@ -112,18 +121,38 @@ export const LoginView = ({ onLoggedIn }) => {
                                             <Form.Label htmlFor='password'>
                                                 Password
                                             </Form.Label>
-                                            <Form.Control
-                                                type='password'
-                                                value={password}
-                                                onChange={(e) =>
-                                                    setPassword(e.target.value)
-                                                }
-                                                minLength={8}
-                                                id='password'
-                                                name='password'
-                                                required
-                                                className='initial--forms'
-                                            />
+                                            <InputGroup className='initial--forms'>
+                                                <Form.Control
+                                                    type={
+                                                        showPassword
+                                                            ? 'text'
+                                                            : 'password'
+                                                    }
+                                                    value={password}
+                                                    onChange={(e) =>
+                                                        setPassword(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    minLength={8}
+                                                    id='password'
+                                                    name='password'
+                                                    required
+                                                />
+                                                <Button
+                                                    onClick={() =>
+                                                        setShowPassword(
+                                                            !showPassword
+                                                        )
+                                                    }
+                                                >
+                                                    {showPassword ? (
+                                                        <FaEyeSlash />
+                                                    ) : (
+                                                        <FaEye />
+                                                    )}
+                                                </Button>
+                                            </InputGroup>
                                         </Form.Group>
                                         <Button
                                             variant='primary'

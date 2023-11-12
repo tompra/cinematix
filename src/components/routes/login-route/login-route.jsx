@@ -3,7 +3,7 @@ import { LoginView } from '../../views/login-view/login-view';
 import { Navigate } from 'react-router';
 
 export const LoginRoute = () => {
-    const { user, setUser, token, setToken } = useAuthCtx();
+    const { setUser, setToken, user, token } = useAuthCtx();
     return !user ? (
         <LoginView
             onLoggedIn={(user, token) => {
