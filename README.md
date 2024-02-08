@@ -22,23 +22,29 @@ By the end of the project, I’ll have a complete web app (client-side and serve
 
 ### Dependencies
 
--   React
--   React-router
--   React-router-dom
--   Prop-types
--   React-bootstrap
--   Bootstrap
--   React-animated-heart
--   React-icons
--   React-toastify
+| Dependency            | Description                                                                                                          |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------|
+| @popperjs/core        | Popper.js is used for positioning poppers in web applications. Popper is the core library.                           |
+| bootstrap             | Bootstrap is a popular CSS framework for building responsive and mobile-first websites.                             |
+| prop-types            | PropTypes is a package used for runtime type-checking of React props. It helps to catch bugs early by validating the data types of props passed to React components. |
+| react                 | React is a JavaScript library for building user interfaces.                                                          |
+| react-animated-heart | React Animated Heart is a library for creating animated heart components in React.                                   |
+| react-bootstrap       | React Bootstrap is a library that provides Bootstrap components as React components. It allows you to use Bootstrap's styling and functionality in your React app. |
+| react-dom             | React DOM is a package that provides DOM-specific methods that can be used with React.                                |
+| react-icons           | React Icons is a library that provides popular icons as React components.                                             |
+| react-router          | React Router is a library for handling routing in React applications.                                                 |
+| react-router-dom      | React Router DOM is a library that provides DOM bindings for React Router.                                            |
+| react-toastify        | React Toastify is a notification library for React applications.                                                      |
 
 ### Dev-Dependencies
 
--   Vite
--   Process
--   Transformer-sass
--   ESLint
--   Sass
+| Dependency        | Description                                                             |
+|-------------------|-------------------------------------------------------------------------|
+| Vite              | Vite is a next-generation frontend build tool that provides a fast development server and optimized build setup. |
+| Process           | Process is a general-purpose library for managing processes in Node.js. |
+| Transformer-sass | Transformer-sass is a transformer plugin for Vite that allows importing and compiling Sass files in your project. |
+| ESLint            | ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. |
+| Sass              | Sass is a CSS preprocessor that adds power and elegance to the basic language. |
 
 ## Project
 
