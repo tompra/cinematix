@@ -1,5 +1,7 @@
 # Cinematix
 
+![home](https://github.com/tompra/cinematix/assets/143709419/60b6a7e9-bf9f-46d9-922a-512ff6524380)
+
 ## Description
 
 Using React, build the client-side for an app called popcornHub based on its existing server-side code (REST API and database).
